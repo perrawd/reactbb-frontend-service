@@ -45,4 +45,4 @@ const BoardList = (props) => {
   )
 }
 
-export default BoardList
+export { BoardList, GET_CATEGORIES_QUERY }
