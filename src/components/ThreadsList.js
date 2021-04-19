@@ -3,7 +3,7 @@ import {gql, useQuery} from '@apollo/client'
 import { List } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-const query = gql`
+const GET_POSTS_QUERY = gql`
   query {
     getPosts {
          title
@@ -12,7 +12,7 @@ const query = gql`
   `
 
 const ThreadsList = (props) => {
-  const { loading, error, data } = useQuery(query)
+  const { loading, error, data } = useQuery(GET_POSTS_QUERY)
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
 

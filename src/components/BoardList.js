@@ -3,7 +3,7 @@ import {gql, useQuery} from '@apollo/client'
 import { Item, Label } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-const query = gql`
+const GET_CATEGORIES_QUERY = gql`
   query {
     getCategories {
          title
@@ -13,8 +13,8 @@ const query = gql`
     }
   `
 
-function BoardList (props) {
-  const { loading, error, data } = useQuery(query)
+const BoardList = (props) => {
+  const { loading, error, data } = useQuery(GET_CATEGORIES_QUERY)
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
 
