@@ -8,7 +8,12 @@ test('navbar rendering without errors', () => {
           <Navbar/>
       </Router>
    
-  );
-  const linkElement = screen.getByText(/Home/i);
-  expect(linkElement).toBeInTheDocument();
-});
+  )
+  const homeLink = screen.getByText(/Home/i)
+  const messagesLink = screen.getByText(/Messages/i)
+  const friendsLink = screen.getByText(/Friends/i)
+
+  expect(homeLink).toBeInTheDocument()
+  expect(messagesLink).toBeInTheDocument()
+  expect(friendsLink).toBeInTheDocument()
+})

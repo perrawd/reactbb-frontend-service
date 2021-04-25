@@ -28,7 +28,7 @@ const BoardList = (props) => {
           <Item.Content>
             <Item.Header>{category.title}</Item.Header>
             <Item.Meta>
-              <span className='cinema'>{category.subtitle}</span>
+              <span className='cinema'></span>
             </Item.Meta>
             <Item.Description>{category.subtitle}</Item.Description>
             <Item.Extra>

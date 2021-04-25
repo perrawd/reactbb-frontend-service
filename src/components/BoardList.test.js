@@ -1,7 +1,7 @@
+import { act } from '@testing-library/react'
 import TestRenderer from 'react-test-renderer'
 import { MockedProvider } from '@apollo/client/testing'
 import { GET_CATEGORIES_QUERY, BoardList } from './BoardList'
-import { act } from '@testing-library/react'
 import { BrowserRouter as Router } from "react-router-dom"
 import { render, screen } from '@testing-library/react';
 
@@ -13,24 +13,13 @@ const mocks = [{
       data: {
         getCategories: [
             { title: 'Mock Category', subtitle: 'Lorem ipsum', id: '607aadfc6fc59bc680853abc' },
-            { title: 'Mockz 2', subtitle: 'Lorem ipsum', id: '607aadfc6fc59bc68x0853abc' }
+            { title: 'Mocking test', subtitle: 'Subtitle testing', id: '607aadfc6fc59bc68x0853abc' }
         ],
       },
     },
   }]
-/*
-it('render BoardList component without error', () => {
-    const component = TestRenderer.create(
-        <MockedProvider mocks={mocks} addTypename={false}>
-           <BoardList></BoardList>
-        </MockedProvider>,
-      )
-    const tree = component.toJSON();
-    // console.log(tree)
-    expect(tree).toContain('Loading...');
-  }
-)
-*/
+
+
 it('Get (loaded) category title without error', async () => {
   await act(async () => {
     render(
@@ -40,16 +29,32 @@ it('Get (loaded) category title without error', async () => {
         </Router>
       </MockedProvider>
     )
+
     await new Promise(resolve => setTimeout(resolve, 0))
-    // await act(() => new Promise(resolve => setTimeout(resolve, 0)))
-    // console.log(screen)
-    const linkElement = screen.getByText(/Mock Category/i);
-    const linkElement2 = screen.getByText(/Mockz 3/i);
-    expect(linkElement).toBeInTheDocument();
-    expect(linkElement2).toBeInTheDocument();
+
+    const categoryHeader1 = screen.getByText(/Mock Category/i)
+    const categoryHeader2 = screen.getByText(/Mocking test/i)
+    const subtitleElement = screen.getByText(/Subtitle testing/i)
+    expect(categoryHeader1).toBeInTheDocument()
+    expect(categoryHeader2).toBeInTheDocument()
+    expect(subtitleElement).toBeInTheDocument()
   })
-  
 })
+
+
+it('render BoardList component without error', () => {
+  const component = TestRenderer.create(
+    <Router>
+      <MockedProvider mocks={mocks} addTypename={false}>
+         <BoardList></BoardList>
+      </MockedProvider>
+    </Router>,
+    )
+  const tree = component.toJSON();
+  console.log(tree)
+  expect(tree).toContain('Loading...');
+}
+)
 
 /*
 it('render BoardList component success', async () => {
