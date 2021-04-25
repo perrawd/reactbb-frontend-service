@@ -23,7 +23,7 @@ const BoardList = (props) => {
   return (
     <Item.Group>
       {categories.map(category => (
-        <Item as={Link} to='/postlist' key={category.id}>
+        <Item as={Link} to='/posts' key={category.id}>
           <Item.Image src='./logo192.png' size='tiny'/>
           <Item.Content>
             <Item.Header>{category.title}</Item.Header>
