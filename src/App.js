@@ -1,9 +1,9 @@
 import './App.css';
 import { Container } from 'semantic-ui-react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { BoardList } from './components/BoardList.js'
-import Navbar from './components/Navbar.js';
-import ThreadsList from './components/ThreadsList';
+import { BoardList } from './components/BoardList/BoardList'
+import Navbar from './components/NavBar/NavBar';
+import ThreadsList from './components/ThreadList/ThreadList';
 
 function App() {
   return (

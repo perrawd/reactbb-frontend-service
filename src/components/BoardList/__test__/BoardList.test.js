@@ -1,9 +1,9 @@
+import { GET_CATEGORIES_QUERY, BoardList } from '../BoardList'
+import { BrowserRouter as Router } from "react-router-dom"
 import { act } from '@testing-library/react'
 import TestRenderer from 'react-test-renderer'
 import { MockedProvider } from '@apollo/client/testing'
-import { GET_CATEGORIES_QUERY, BoardList } from './BoardList'
-import { BrowserRouter as Router } from "react-router-dom"
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react'
 
 const mocks = [{
     request: {
@@ -41,50 +41,15 @@ it('Get (loaded) category title without error', async () => {
   })
 })
 
-
 it('render BoardList component without error', () => {
   const component = TestRenderer.create(
-    <Router>
-      <MockedProvider mocks={mocks} addTypename={false}>
-         <BoardList></BoardList>
-      </MockedProvider>
-    </Router>,
-    )
-  const tree = component.toJSON();
-  console.log(tree)
-  expect(tree).toContain('Loading...');
-}
-)
-
-/*
-it('render BoardList component success', async () => {
-  const component = TestRenderer.create(
-      <MockedProvider mocks={mocks} addTypename={false}>
-         <BoardList></BoardList>
-      </MockedProvider>,
-    )
-
-    await new Promise(resolve => setTimeout(resolve, 0))
-  const tree = component.toJSON();
-  console.log(tree)
-  expect(tree).toContain('Mock');
-}
-)
-
-it('should render categories', async () => {
-  const component = TestRenderer.create(
-    <BrowserRouter>
     <MockedProvider mocks={mocks} addTypename={false}>
-       <BoardList></BoardList>
-    </MockedProvider>
-    </BrowserRouter>
+      <Router>
+        <BoardList></BoardList>
+      </Router>
+    </MockedProvider>,
   )
-  await new Promise(resolve => setTimeout(resolve, 0))
-
-  const p = component.root
-  const d = component.toJSON()
-  console.log(p.findByType('div'))
-  console.log(d)
-  expect(p).toContain('Mock')
-})
-*/
+    const tree = component.toJSON()
+    expect(tree).toContain('Loading...')
+  }
+)
