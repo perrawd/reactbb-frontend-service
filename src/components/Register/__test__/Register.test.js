@@ -11,10 +11,13 @@ const setup = () => {
     }
 }
 
+test('It renders register page without error', () => {
+  render(<Register></Register>)
+  const pageElement = screen.getByText(/Register/i);
+  expect(pageElement).toBeInTheDocument();
+})
+
 test('It should allow input text in username field', () => {
-  render(
-      <Register></Register>
-  )
   const { input } = setup()
   fireEvent.change(input, { target: { value: 'mockUser' } })
   expect(input.value).toBe('mockUser')

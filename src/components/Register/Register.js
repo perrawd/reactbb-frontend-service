@@ -11,35 +11,35 @@ export default function Register() {
 
     return (
         <div>
-            <Form onSubmit={onSubmit} noValidate>
+            <Form /*onSubmit={onSubmit}*/ noValidate>
                 <h1>Register</h1>
                 <Form.Input
                   label="Username"
                   placeholder="Username"
                   name="username"
                   value={values.username}
-                  onChange={onChange}
+                  // onChange={onChange}
                   />
                 <Form.Input
                   label="Email"
                   placeholder="Email"
                   name="email"
                   value={values.email}
-                  onChange={onChange}
+                  // onChange={onChange}
                   />
                 <Form.Input
                   label="Password"
                   placeholder="Password"
                   name="password"
                   value={values.password}
-                  onChange={onChange}
+                  // onChange={onChange}
                   />
                 <Form.Input
                   label="ConfirmPassword"
                   placeholder="ConfirmPassword"
                   name="confirmPassword"
                   value={values.confirmPassword}
-                  onChange={onChange}
+                  // onChange={onChange}
                   />
             </Form>
             <Button type='submit'>Submit</Button>
