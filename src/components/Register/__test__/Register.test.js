@@ -1,24 +1,31 @@
 import Register from '../Register'
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom'
-
-const setup = () => {
-    const utils = render(<Register></Register>)
-    const input = utils.getByLabelText('username-input')
-    return {
-      input,
-      ...utils,
-    }
-}
+import { ApolloProvider } from "@apollo/client"
+import client from '../../../utils/ApolloClient.js'
+import { Input } from 'semantic-ui-react'
 
 test('It renders register page without error', () => {
-  render(<Register></Register>)
+  render(
+    <ApolloProvider client={client}>
+      <Register></Register>
+    </ApolloProvider>
+    )
   const pageElement = screen.getByText(/Register/i);
   expect(pageElement).toBeInTheDocument();
 })
 
-test('It should allow input text in username field', () => {
-  const { input } = setup()
-  fireEvent.change(input, { target: { value: 'mockUser' } })
-  expect(input.value).toBe('mockUser')
+it('can change the value of a Input', () => {
+  const { getAllByPlaceholderText } = render(
+    <ApolloProvider client={client}>
+      <Register></Register>
+    </ApolloProvider>
+  )
+
+  const element = getAllByPlaceholderText('Username')
+  const elementInput = element[0]
+  
+  fireEvent.change(elementInput, { target: { value: 'mockUser' } })
+  
+  expect(elementInput).toHaveValue('mockUser')
 })
