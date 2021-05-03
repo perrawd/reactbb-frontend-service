@@ -10,10 +10,6 @@ test('navbar rendering without errors', () => {
    
   )
   const homeLink = screen.getByText(/Home/i)
-  const messagesLink = screen.getByText(/Messages/i)
-  const friendsLink = screen.getByText(/Friends/i)
 
   expect(homeLink).toBeInTheDocument()
-  expect(messagesLink).toBeInTheDocument()
-  expect(friendsLink).toBeInTheDocument()
 })

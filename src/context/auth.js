@@ -1,5 +1,7 @@
 import React, { useReducer, createContext } from 'react'
 
+const initialState = { user: null }
+
 const AuthContext = createContext({
     user: null,
     login: (data) => {},
@@ -24,9 +26,10 @@ function authReducer (state, action) {
 }
 
 function AuthProvider (props) {
-    const [state, dispatch] = useReducer(authReducer, { user: null })
+    const [state, dispatch] = useReducer(authReducer, initialState)
 
     function login (data) {
+        localStorage.setItem('jwtToken', data.accessToken)
         dispatch({
             type: 'LOGIN',
             payload: data
@@ -34,6 +37,7 @@ function AuthProvider (props) {
     }
 
     function logout () {
+        localStorage.removeItem('jwtToken')
         dispatch({ type: 'LOGOUT' })
     }
 

@@ -1,46 +1,83 @@
-import React, { Component } from 'react'
+import React, { Component, useContext, useState } from 'react'
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../context/auth'
 
-export default class NavBar extends Component {
-  state = { activeItem: 'home' }
+export default function NavBar (props) {
+  const { user, logout } = useContext(AuthContext)
+  const pathname = window.location.pathname
+  const path = pathname === '/' ? 'home' : pathname.substr(1)
+  const [activeItem, setActiveItem] = useState(path)
+  const handleItemClick = (e, { name }) => setActiveItem(name)
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-  render() {
-    const { activeItem } = this.state
-
-    return (
-      <div>
-        <Menu pointing secondary>
+  const navBar = user ? (
+    <div>
+      <Menu pointing secondary>
+        <Menu.Item
+          name='home'
+          active={activeItem === 'home'}
+          onClick={handleItemClick}
+          as={Link}
+          to="/"
+        />
+        <Menu.Item
+          name='messages'
+          active={activeItem === 'messages'}
+          onClick={handleItemClick}
+          as={Link}
+          to="/graphql"
+        />
+        <Menu.Item
+          name='friends'
+          active={activeItem === 'friends'}
+          onClick={handleItemClick}
+        />
+        <Menu.Menu position='right'>
           <Menu.Item
-            name='home'
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
+            name='my profile'
+            onClick={logout}
+          />
+        </Menu.Menu>
+        <Menu.Menu>
+          <Menu.Item
+            name='logout'
+            onClick={logout}
+          />
+        </Menu.Menu>
+      </Menu>
+    </div>
+  ) : (
+    <div>
+      <Menu pointing secondary>
+        <Menu.Item
+          name='home'
+          active={activeItem === 'home'}
+          onClick={handleItemClick}
+          as={Link}
+          to="/"
+        />
+        <Menu.Menu position='right'>
+          <Menu.Item
+            name='register'
+            active={activeItem === 'register'}
+            onClick={handleItemClick}
             as={Link}
-            to="/"
+            to="/register"
           />
+        </Menu.Menu>
+        <Menu.Menu >
           <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
-            onClick={this.handleItemClick}
+            name='login'
+            active={activeItem === 'login'}
+            onClick={handleItemClick}
             as={Link}
-            to="/graphql"
+            to="/login"
           />
-          <Menu.Item
-            name='friends'
-            active={activeItem === 'friends'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Menu position='right'>
-            <Menu.Item
-              name='logout'
-              active={activeItem === 'logout'}
-              onClick={this.handleItemClick}
-            />
-          </Menu.Menu>
-        </Menu>
-      </div>
-    )
-  }
+        </Menu.Menu>
+      </Menu>
+    </div>
+  )
+
+  return navBar
 }
