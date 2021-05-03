@@ -57,7 +57,7 @@ export default function Register() {
   })
 
   return (
-    <div>
+    <div className="form-container">
         <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
             <h1>Register</h1>
             <Form.Input

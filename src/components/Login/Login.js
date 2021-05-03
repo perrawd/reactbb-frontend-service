@@ -50,7 +50,7 @@ export default function Login() {
   })
 
   return (
-    <div>
+    <div className="form-container">
         <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
             <h1>Login</h1>
             <Form.Input
