@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client'
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
 import { Button, Form } from 'semantic-ui-react'
 
 const REGISTER_USER = gql`
@@ -23,6 +24,8 @@ const REGISTER_USER = gql`
 `
 
 export default function Register() {
+
+  const history = useHistory()
   
   const [errors, setErrors] = useState({})
 
@@ -45,6 +48,7 @@ export default function Register() {
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, result) {
       console.log(result)
+      history.push('/')
     },
     onError(err) {
       console.log(err.graphQLErrors)
