@@ -45,7 +45,7 @@ export default function Login() {
     },
     onError(err) {
       console.log(err.graphQLErrors)
-      setErrors(err.graphQLErrors[0].extensions.exception.validationMessages)
+      setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
   })
 
@@ -74,9 +74,7 @@ export default function Login() {
         {Object.keys(errors).length > 0 && (
         <div className="ui error message">
           <ul className="list">
-            {Object.values(errors).map((value) => (
-              <li key={value}>{value}</li>
-            ))}
+            <li>{errors}</li>
           </ul>
         </div>
       )}
