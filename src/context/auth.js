@@ -1,6 +1,17 @@
+import jwtDecode from 'jwt-decode'
 import React, { useReducer, createContext } from 'react'
 
 const initialState = { user: null }
+
+if (localStorage.getItem('jwtToken')) {
+    const token = jwtDecode(localStorage.getItem('jwtToken'))
+
+    if (token.exp * 1000 < Date.now()) {
+        localStorage.removeItem('jwtToken')
+    } else {
+        initialState.user = token
+    }
+}
 
 const AuthContext = createContext({
     user: null,
