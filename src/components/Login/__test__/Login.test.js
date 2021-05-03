@@ -9,8 +9,9 @@ test('It renders login page without error', () => {
       <Login></Login>
     </ApolloProvider>
     )
-  const pageElement = screen.getByText(/Login/i);
-  expect(pageElement).toBeInTheDocument();
+  const pageElement = screen.getAllByText(/Login/i);
+  const element = pageElement[0]
+  expect(element).toBeInTheDocument();
 })
 
 it('can change the value of a Input', () => {
