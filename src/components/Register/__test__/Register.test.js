@@ -1,9 +1,7 @@
 import Register from '../Register'
-import { render, screen, fireEvent } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { ApolloProvider } from "@apollo/client"
 import client from '../../../utils/ApolloClient.js'
-import { Input } from 'semantic-ui-react'
 
 test('It renders register page without error', () => {
   render(
