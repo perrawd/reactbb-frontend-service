@@ -1,15 +1,17 @@
+/* eslint-disable prefer-destructuring */
+import React from 'react'
 import Login from '../Login'
-import { render, screen, fireEvent } from '@testing-library/react';
-import { ApolloProvider } from "@apollo/client"
 import client from '../../../utils/ApolloClient.js'
+import { ApolloProvider } from "@apollo/client"
+import { render, screen, fireEvent } from '@testing-library/react'
 
 test('It renders login page without error', () => {
   render(<ApolloProvider client={client}>
       <Login></Login>
     </ApolloProvider>)
-  const pageElement = screen.getAllByText(/Login/i);
+  const pageElement = screen.getAllByText(/Login/i)
   const element = pageElement[0]
-  expect(element).toBeInTheDocument();
+  expect(element).toBeInTheDocument()
 })
 
 it('can change the value of a Input', () => {

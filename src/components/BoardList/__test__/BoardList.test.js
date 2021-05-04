@@ -1,9 +1,9 @@
+import React from 'react'
 import { GET_CATEGORIES_QUERY, BoardList } from '../BoardList'
 import { BrowserRouter as Router } from "react-router-dom"
-import { act } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 import TestRenderer from 'react-test-renderer'
 import { MockedProvider } from '@apollo/client/testing'
-import { render, screen } from '@testing-library/react'
 
 const mocks = [
 {
@@ -34,6 +34,7 @@ it('Get (loaded) category title without error', async () => {
         </Router>
       </MockedProvider>)
 
+    // eslint-disable-next-line no-promise-executor-return
     await new Promise(resolve => setTimeout(resolve, 0))
 
     const categoryHeader1 = screen.getByText(/Mock Category/i)

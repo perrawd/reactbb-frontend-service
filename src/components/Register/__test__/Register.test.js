@@ -1,7 +1,8 @@
+import React from 'react'
 import Register from '../Register'
-import { render, screen, fireEvent } from '@testing-library/react'
 import { ApolloProvider } from "@apollo/client"
 import client from '../../../utils/ApolloClient.js'
+import { render, screen, fireEvent } from '@testing-library/react'
 
 test('It renders register page without error', () => {
   render(<ApolloProvider client={client}>
@@ -17,6 +18,7 @@ it('can change the value of a Input', () => {
     </ApolloProvider>)
 
   const element = getAllByPlaceholderText('Username')
+  // eslint-disable-next-line prefer-destructuring
   const elementInput = element[0]
 
   fireEvent.change(elementInput, { target: { value: 'mockUser' } })
