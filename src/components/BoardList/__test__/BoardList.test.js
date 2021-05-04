@@ -5,30 +5,34 @@ import TestRenderer from 'react-test-renderer'
 import { MockedProvider } from '@apollo/client/testing'
 import { render, screen } from '@testing-library/react'
 
-const mocks = [{
+const mocks = [
+{
     request: {
-      query: GET_CATEGORIES_QUERY,
+      query: GET_CATEGORIES_QUERY
     },
     result: {
       data: {
         getCategories: [
-            { title: 'Mock Category', subtitle: 'Lorem ipsum', id: '607aadfc6fc59bc680853abc' },
-            { title: 'Mocking test', subtitle: 'Subtitle testing', id: '607aadfc6fc59bc68x0853abc' }
-        ],
-      },
-    },
-  }]
+            { title: 'Mock Category',
+subtitle: 'Lorem ipsum',
+id: '607aadfc6fc59bc680853abc' },
+            { title: 'Mocking test',
+subtitle: 'Subtitle testing',
+id: '607aadfc6fc59bc68x0853abc' }
+        ]
+      }
+    }
+  }
+]
 
 
 it('Get (loaded) category title without error', async () => {
   await act(async () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
+    render(<MockedProvider mocks={mocks} addTypename={false}>
         <Router>
           <BoardList></BoardList>
         </Router>
-      </MockedProvider>
-    )
+      </MockedProvider>)
 
     await new Promise(resolve => setTimeout(resolve, 0))
 
@@ -42,14 +46,11 @@ it('Get (loaded) category title without error', async () => {
 })
 
 it('render BoardList component without error', () => {
-  const component = TestRenderer.create(
-    <MockedProvider mocks={mocks} addTypename={false}>
+  const component = TestRenderer.create(<MockedProvider mocks={mocks} addTypename={false}>
       <Router>
         <BoardList></BoardList>
       </Router>
-    </MockedProvider>,
-  )
+    </MockedProvider>)
     const tree = component.toJSON()
     expect(tree).toContain('Loading...')
-  }
-)
+  })

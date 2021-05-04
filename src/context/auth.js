@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-function */
 import jwtDecode from 'jwt-decode'
 import React, { useReducer, createContext } from 'react'
 
@@ -15,11 +16,12 @@ if (localStorage.getItem('jwtToken')) {
 
 const AuthContext = createContext({
     user: null,
-    login: (data) => {},
+    // eslint-disable-next-line no-unused-vars
+    login: data => {},
     logout: () => {}
 })
 
-function authReducer (state, action) {
+const authReducer = (state, action) => {
     switch (action.type) {
         case 'LOGIN':
             return {
@@ -36,10 +38,10 @@ function authReducer (state, action) {
     }
 }
 
-function AuthProvider (props) {
+const AuthProvider = props => {
     const [state, dispatch] = useReducer(authReducer, initialState)
 
-    function login (data) {
+    const login = data => {
         localStorage.setItem('jwtToken', data.accessToken)
         dispatch({
             type: 'LOGIN',
@@ -47,14 +49,16 @@ function AuthProvider (props) {
         })
     }
 
-    function logout () {
+    const logout = () => {
         localStorage.removeItem('jwtToken')
         dispatch({ type: 'LOGOUT' })
     }
 
     return (
         <AuthContext.Provider
-            value={{ user: state.user, login, logout }}
+            value={{ user: state.user,
+                login,
+                logout }}
             {...props}
         />
     )

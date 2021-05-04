@@ -13,33 +13,34 @@ const GET_CATEGORIES_QUERY = gql`
     }
   `
 
-const BoardList = (props) => {
+const BoardList = () => {
   const { loading, error, data } = useQuery(GET_CATEGORIES_QUERY)
-  if (loading) return 'Loading...'
-  if (error) return `Error! ${error.message}`
+  if (loading) {
+ return 'Loading...'
+}
+  if (error) {
+ return `Error! ${error.message}`
+}
 
   const categories = data.getCategories
 
   return (
     <Item.Group>
-      {categories.map(category => (
-        <Item as={Link} to='/posts' key={category.id}>
-          <Item.Image src='./logo192.png' size='tiny'/>
+      {categories.map(category => <Item as={Link} to="/posts" key={category.id}>
+          <Item.Image src="./logo192.png" size="tiny"/>
           <Item.Content>
             <Item.Header>{category.title}</Item.Header>
             <Item.Meta>
-              <span className='cinema'></span>
+              <span className="cinema"></span>
             </Item.Meta>
             <Item.Description>{category.subtitle}</Item.Description>
             <Item.Extra>
               <Label>Demo</Label>
               <Label>Limited</Label>
-              <Label icon='globe' content='Additional Languages' />
+              <Label icon="globe" content="Additional Languages" />
             </Item.Extra>
           </Item.Content>
-        </Item>
-      )
-    )} 
+        </Item>)}
     </Item.Group>
 
   )

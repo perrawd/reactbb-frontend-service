@@ -4,42 +4,42 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/auth'
 import UserButton from '../UserButton/UserButton'
 
-export default function NavBar (props) {
+export default function NavBar () {
   const { user } = useContext(AuthContext)
-  const pathname = window.location.pathname
+  const {pathname} = window.location
   const path = pathname === '/' ? 'home' : pathname.substr(1)
   const [activeItem, setActiveItem] = useState(path)
   const handleItemClick = (e, { name }) => setActiveItem(name)
-  const divStyle = { height: 43, marginBottom: 10 }
+  const divStyle = { height: 43,
+marginBottom: 10 }
 
-  const navBar = user ? (
-    <div>
+  const navBar = user
+    ? <div>
       <Menu pointing secondary style={divStyle}>
         <Menu.Item
-          name='home'
+          name="home"
           active={activeItem === 'home'}
           onClick={handleItemClick}
           as={Link}
           to="/"
         />
-        <Menu.Menu position='right'>
+        <Menu.Menu position="right">
             <UserButton></UserButton>
         </Menu.Menu>
       </Menu>
     </div>
-  ) : (
-    <div>
+   : <div>
       <Menu pointing secondary style={divStyle}>
         <Menu.Item
-          name='home'
+          name="home"
           active={activeItem === 'home'}
           onClick={handleItemClick}
           as={Link}
           to="/"
         />
-        <Menu.Menu position='right'>
+        <Menu.Menu position="right">
           <Menu.Item
-            name='register'
+            name="register"
             active={activeItem === 'register'}
             onClick={handleItemClick}
             as={Link}
@@ -48,7 +48,7 @@ export default function NavBar (props) {
         </Menu.Menu>
         <Menu.Menu >
           <Menu.Item
-            name='login'
+            name="login"
             active={activeItem === 'login'}
             onClick={handleItemClick}
             as={Link}
@@ -57,7 +57,7 @@ export default function NavBar (props) {
         </Menu.Menu>
       </Menu>
     </div>
-  )
+
 
   return navBar
 }

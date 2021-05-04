@@ -23,10 +23,10 @@ const REGISTER_USER = gql`
     }
 `
 
-export default function Register() {
+export default function Register () {
 
   const history = useHistory()
-  
+
   const [errors, setErrors] = useState({})
 
   const [values, setValues] = useState({
@@ -36,25 +36,24 @@ export default function Register() {
       confirmPassword: ''
   })
 
-  const onChange = (event) => {
-    setValues({...values, [event.target.name]: event.target.value})
-  }
-
-  const onSubmit = (event) => {
-    event.preventDefault()
-    registerUser({variables: values})
+  const onChange = event => {
+    setValues({...values,
+[event.target.name]: event.target.value})
   }
 
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
-    update(proxy, result) {
-      console.log(result)
+    update () {
       history.push('/')
     },
-    onError(err) {
-      console.log(err.graphQLErrors)
+    onError (err) {
       setErrors(err.graphQLErrors[0].extensions.exception.validationMessages)
     }
   })
+
+  const onSubmit = event => {
+    event.preventDefault()
+    registerUser({variables: values})
+  }
 
   return (
     <div className="form-container">
@@ -92,17 +91,15 @@ export default function Register() {
               value={values.confirmPassword}
               onChange={onChange}
               />
-              <Button type='submit'>Submit</Button>
+              <Button type="submit">Submit</Button>
         </Form>
-        {Object.keys(errors).length > 0 && (
+        {Object.keys(errors).length > 0 &&
         <div className="ui error message">
           <ul className="list">
-            {Object.values(errors).map((value) => (
-              <li key={value}>{value}</li>
-            ))}
+            {Object.values(errors).map(value => <li key={value}>{value}</li>)}
           </ul>
         </div>
-      )}
+      }
     </div>
   )
 }

@@ -13,17 +13,17 @@ const LOGIN_USER = gql`
       username:$username
       password:$password
   ){
-  	accessToken
+    accessToken
     refreshToken
   }
 }
 `
 
-export default function Login() {
+export default function Login () {
   const context = useContext(AuthContext)
 
   const history = useHistory()
-  
+
   const [errors, setErrors] = useState({})
 
   const [values, setValues] = useState({
@@ -31,26 +31,25 @@ export default function Login() {
       password: ''
   })
 
-  const onChange = (event) => {
-    setValues({...values, [event.target.name]: event.target.value})
-  }
-
-  const onSubmit = (event) => {
-    event.preventDefault()
-    loginUser({variables: values})
+  const onChange = event => {
+    setValues({...values,
+[event.target.name]: event.target.value})
   }
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-    update(proxy, { data: { login: userData }}) {
-      console.log(userData)
+    update (proxy, { data: { login: userData }}) {
       context.login(userData)
       history.push('/')
     },
-    onError(err) {
-      console.log(err.graphQLErrors)
+    onError (err) {
       setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
   })
+
+  const onSubmit = event => {
+    event.preventDefault()
+    loginUser({variables: values})
+  }
 
   return (
     <div className="form-container">
@@ -72,15 +71,15 @@ export default function Login() {
               value={values.password}
               onChange={onChange}
               />
-              <Button type='submit'>Login</Button>
+              <Button type="submit">Login</Button>
         </Form>
-        {Object.keys(errors).length > 0 && (
+        {Object.keys(errors).length > 0 &&
         <div className="ui error message">
           <ul className="list">
             <li>{errors}</li>
           </ul>
         </div>
-      )}
+      }
     </div>
   )
 }

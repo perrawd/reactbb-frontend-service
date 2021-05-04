@@ -4,11 +4,9 @@ import { ApolloProvider } from "@apollo/client"
 import client from './utils/ApolloClient.js'
 
 test('navbar rendering without errors', () => {
-  render(
-   <ApolloProvider client={client}>
+  render(<ApolloProvider client={client}>
      <App />
-   </ApolloProvider>
-  );
+   </ApolloProvider>);
   const linkElement = screen.getByText(/Home/i);
   expect(linkElement).toBeInTheDocument();
 });
