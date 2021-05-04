@@ -8,13 +8,15 @@ const NavBar = () => {
   const { user } = useContext(AuthContext);
   const { pathname } = window.location;
   const path = pathname === "/" ? "home" : pathname.substr(1);
+
   const [activeItem, setActiveItem] = useState(path);
   const handleItemClick = (e, { name }) => setActiveItem(name);
+
   const divStyle = { height: 43,
                      marginBottom: 10 };
 
   const navBar = user
-  ? <div>
+    ? <div>
       <Menu pointing secondary style={divStyle}>
         <Menu.Item
           name="home"
