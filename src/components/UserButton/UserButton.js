@@ -8,7 +8,7 @@ const [activeItem, setActiveItem] = useState('')
 const handleItemClick = (e, { name }) => setActiveItem(name)
     
   return (
-    <Popup trigger={<Menu.Item name='Me'> <img size="50%" alt="avatar" src='https://semantic-ui.com/images/avatar2/small/mark.png' /></Menu.Item>} hoverable>
+    <Popup trigger={<Menu.Item name='Me' style={{ padding: 3 }}> <img size="50%" alt="avatar" src='https://semantic-ui.com/images/avatar2/small/mark.png'/></Menu.Item>} hoverable>
         <Menu secondary vertical borderless compact>
           <Menu.Item
             name='messages'

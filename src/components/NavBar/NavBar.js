@@ -10,29 +10,17 @@ export default function NavBar (props) {
   const path = pathname === '/' ? 'home' : pathname.substr(1)
   const [activeItem, setActiveItem] = useState(path)
   const handleItemClick = (e, { name }) => setActiveItem(name)
-
+  const divStyle = { height: 43, marginBottom: 10 }
 
   const navBar = user ? (
     <div>
-      <Menu pointing secondary>
+      <Menu pointing secondary style={divStyle}>
         <Menu.Item
           name='home'
           active={activeItem === 'home'}
           onClick={handleItemClick}
           as={Link}
           to="/"
-        />
-        <Menu.Item
-          name='messages'
-          active={activeItem === 'messages'}
-          onClick={handleItemClick}
-          as={Link}
-          to="/graphql"
-        />
-        <Menu.Item
-          name='friends'
-          active={activeItem === 'friends'}
-          onClick={handleItemClick}
         />
         <Menu.Menu position='right'>
             <UserButton></UserButton>
@@ -41,7 +29,7 @@ export default function NavBar (props) {
     </div>
   ) : (
     <div>
-      <Menu pointing secondary>
+      <Menu pointing secondary style={divStyle}>
         <Menu.Item
           name='home'
           active={activeItem === 'home'}
