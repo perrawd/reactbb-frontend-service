@@ -1,10 +1,11 @@
-import React, { Component, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/auth'
+import UserButton from '../UserButton/UserButton'
 
 export default function NavBar (props) {
-  const { user, logout } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const pathname = window.location.pathname
   const path = pathname === '/' ? 'home' : pathname.substr(1)
   const [activeItem, setActiveItem] = useState(path)
@@ -34,16 +35,7 @@ export default function NavBar (props) {
           onClick={handleItemClick}
         />
         <Menu.Menu position='right'>
-          <Menu.Item
-            name='my profile'
-            onClick={logout}
-          />
-        </Menu.Menu>
-        <Menu.Menu>
-          <Menu.Item
-            name='logout'
-            onClick={logout}
-          />
+            <UserButton></UserButton>
         </Menu.Menu>
       </Menu>
     </div>
