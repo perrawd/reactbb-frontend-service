@@ -1,33 +1,33 @@
-import React from 'react'
-import {gql, useQuery} from '@apollo/client'
-import { Item, Label } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { gql, useQuery } from "@apollo/client";
+import { Item, Label } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const GET_CATEGORIES_QUERY = gql`
   query {
     getCategories {
-         title
-         subtitle
-         id
-     }
+      title
+      subtitle
+      id
     }
-  `
+  }
+`;
 
 const BoardList = () => {
-  const { loading, error, data } = useQuery(GET_CATEGORIES_QUERY)
+  const { loading, error, data } = useQuery(GET_CATEGORIES_QUERY);
   if (loading) {
- return 'Loading...'
-}
+    return "Loading...";
+  }
   if (error) {
- return `Error! ${error.message}`
-}
+    return `Error! ${error.message}`;
+  }
 
-  const categories = data.getCategories
+  const categories = data.getCategories;
 
   return (
     <Item.Group>
       {categories.map(category => <Item as={Link} to="/posts" key={category.id}>
-          <Item.Image src="./logo192.png" size="tiny"/>
+          <Item.Image src="./logo192.png" size="tiny" />
           <Item.Content>
             <Item.Header>{category.title}</Item.Header>
             <Item.Meta>
@@ -42,8 +42,7 @@ const BoardList = () => {
           </Item.Content>
         </Item>)}
     </Item.Group>
+  );
+};
 
-  )
-}
-
-export { BoardList, GET_CATEGORIES_QUERY }
+export { BoardList, GET_CATEGORIES_QUERY };

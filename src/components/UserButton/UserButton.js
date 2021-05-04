@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Popup, Menu } from 'semantic-ui-react'
 import { AuthContext } from '../../context/auth'
 
-export default function Login () {
+const UserButton = () => {
 const { logout } = useContext(AuthContext)
 const [activeItem, setActiveItem] = useState('')
 const handleItemClick = (e, { name }) => setActiveItem(name)
@@ -29,3 +29,5 @@ const handleItemClick = (e, { name }) => setActiveItem(name)
     </Popup>
   )
 }
+
+export default UserButton;
