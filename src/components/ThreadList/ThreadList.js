@@ -1,7 +1,7 @@
-import React from "react";
-import { gql, useQuery } from "@apollo/client";
-import { List } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { gql, useQuery } from '@apollo/client'
+import { List } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 const GET_POSTS_QUERY = gql`
   query {
@@ -10,18 +10,18 @@ const GET_POSTS_QUERY = gql`
       title
     }
   }
-`;
+`
 
 const ThreadsList = () => {
-  const { loading, error, data } = useQuery(GET_POSTS_QUERY);
+  const { loading, error, data } = useQuery(GET_POSTS_QUERY)
   if (loading) {
-    return "Loading...";
+    return 'Loading...'
   }
   if (error) {
-    return `Error! ${error.message}`;
+    return `Error! ${error.message}`
   }
 
-  const posts = data.getPosts;
+  const posts = data.getPosts
 
   return (
     <List divided relaxed>
@@ -34,7 +34,7 @@ const ThreadsList = () => {
           </List.Content>
         </List.Item>)}
     </List>
-  );
-};
+  )
+}
 
-export default ThreadsList;
+export default ThreadsList

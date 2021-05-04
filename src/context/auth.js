@@ -1,16 +1,16 @@
 /* eslint-disable no-empty-function */
-import jwtDecode from "jwt-decode";
-import React, { useReducer, createContext } from "react";
+import jwtDecode from 'jwt-decode'
+import React, { useReducer, createContext } from 'react'
 
-const initialState = { user: null };
+const initialState = { user: null }
 
-if (localStorage.getItem("jwtToken")) {
-  const token = jwtDecode(localStorage.getItem("jwtToken"));
+if (localStorage.getItem('jwtToken')) {
+  const token = jwtDecode(localStorage.getItem('jwtToken'))
 
   if (token.exp * 1000 < Date.now()) {
-    localStorage.removeItem("jwtToken");
+    localStorage.removeItem('jwtToken')
   } else {
-    initialState.user = token;
+    initialState.user = token
   }
 }
 
@@ -19,49 +19,51 @@ const AuthContext = createContext({
   // eslint-disable-next-line no-unused-vars
   login: data => {},
   logout: () => {}
-});
+})
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case "LOGIN":
+    case 'LOGIN':
       return {
         ...state,
         user: action.payload
-      };
-    case "LOGOUT":
+      }
+    case 'LOGOUT':
       return {
         ...state,
         user: null
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
 const AuthProvider = props => {
-  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [state, dispatch] = useReducer(authReducer, initialState)
 
   const login = data => {
-    localStorage.setItem("jwtToken", data.accessToken);
+    localStorage.setItem('jwtToken', data.accessToken)
     dispatch({
-      type: "LOGIN",
+      type: 'LOGIN',
       payload: data
-    });
-  };
+    })
+  }
 
   const logout = () => {
-    localStorage.removeItem("jwtToken");
-    dispatch({ type: "LOGOUT" });
-  };
+    localStorage.removeItem('jwtToken')
+    dispatch({ type: 'LOGOUT' })
+  }
 
   return (
     <AuthContext.Provider
-      value={{ user: state.user,
-               login,
-               logout }}
+      value={{
+        user: state.user,
+        login,
+        logout
+      }}
       {...props}
     />
-  );
-};
+  )
+}
 
-export { AuthContext, AuthProvider };
+export { AuthContext, AuthProvider }

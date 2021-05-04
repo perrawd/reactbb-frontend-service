@@ -1,7 +1,7 @@
-import { gql, useMutation } from "@apollo/client";
-import React, { useState } from "react";
-import { useHistory } from "react-router";
-import { Button, Form } from "semantic-ui-react";
+import { gql, useMutation } from '@apollo/client'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router'
+import { Button, Form } from 'semantic-ui-react'
 
 const REGISTER_USER = gql`
   mutation register(
@@ -21,42 +21,44 @@ const REGISTER_USER = gql`
       id
     }
   }
-`;
+`
 
 const Register = () => {
-  const history = useHistory();
+  const history = useHistory()
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({})
 
   const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  });
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
 
   const onChange = event => {
-    setValues({ ...values,
-      [event.target.name]: event.target.value });
-  };
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value
+    })
+  }
 
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update () {
-      history.push("/");
+      history.push('/')
     },
     onError (err) {
-      setErrors(err.graphQLErrors[0].extensions.exception.validationMessages);
+      setErrors(err.graphQLErrors[0].extensions.exception.validationMessages)
     }
-  });
+  })
 
   const onSubmit = event => {
-    event.preventDefault();
-    registerUser({ variables: values });
-  };
+    event.preventDefault()
+    registerUser({ variables: values })
+  }
 
   return (
     <div className="form-container">
-      <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
+      <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <h1>Register</h1>
         <Form.Input
           label="Username"
@@ -92,15 +94,13 @@ const Register = () => {
         />
         <Button type="submit">Submit</Button>
       </Form>
-      {Object.keys(errors).length > 0 &&
-        <div className="ui error message">
+      {Object.keys(errors).length > 0 && <div className="ui error message">
           <ul className="list">
             {Object.values(errors).map(value => <li key={value}>{value}</li>)}
           </ul>
-        </div>
-      }
+        </div>}
     </div>
-  );
+  )
 }
 
-export default Register;
+export default Register
