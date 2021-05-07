@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Popup, Menu } from 'semantic-ui-react'
+import { Popup, Menu, Image } from 'semantic-ui-react'
 import { AuthContext } from '../../context/auth'
 
 const UserButton = () => {
@@ -12,10 +12,11 @@ const UserButton = () => {
       trigger={
         <Menu.Item name="Me" style={{ padding: 3 }}>
           {' '}
-          <img
-            size="50%"
+          <Image
+            size="mini"
             alt="avatar"
             src="https://semantic-ui.com/images/avatar2/small/mark.png"
+            circular
           />
         </Menu.Item>
       }
