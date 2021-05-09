@@ -10,6 +10,7 @@ import { BoardList } from './components/BoardList/BoardList'
 import ThreadsList from './components/ThreadList/ThreadList'
 import Register from './components/Register/Register'
 import Login from './components/Login/Login'
+import AddThread from './components/AddThread/AddThread'
 
 import AuthRoute from './utils/AuthRoute'
 
@@ -23,6 +24,7 @@ const App = () => {
           <Route exact path="/posts" component={ThreadsList} />
           <AuthRoute exact path="/register" component={Register} />
           <AuthRoute exact path="/login" component={Login} />
+          <Route exact path="/addthread" component={AddThread} />
         </Router>
       </Container>
     </AuthProvider>

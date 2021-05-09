@@ -1,23 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Item, Label } from 'semantic-ui-react'
+import { Grid, Image } from 'semantic-ui-react'
 
 export const SubCategory = props => {
   return (
-    <div>
-        <Item as={Link} to="/posts" key={props.data.id}>
-          <Item.Image src="./logo192.png" size="tiny" />
-          <Item.Content>
-            <Item.Header>{props.data.title}</Item.Header>
-
-            <Item.Description>{props.data.subtitle}</Item.Description>
-            <Item.Extra>
-              <Label>Demo</Label>
-              <Label>Limited</Label>
-              <Label icon="globe" content="Additional Languages" />
-            </Item.Extra>
-          </Item.Content>
-        </Item>
-    </div>
+    <Grid.Row key={props.data.id}>
+      <Grid.Column width={1} textAlign="center">
+        <Image src="./logo192.png" size="mini" />
+      </Grid.Column>
+      <Grid.Column width={7}>
+        <Link to={props.data.id}><h5>{props.data.title}</h5></Link>
+        {props.data.subtitle}
+      </Grid.Column>
+      <Grid.Column width={1} textAlign="center">
+        25
+      </Grid.Column>
+      <Grid.Column width={1} textAlign="center">
+        10
+      </Grid.Column>
+      <Grid.Column width={6}>{props.data.subtitle}</Grid.Column>
+    </Grid.Row>
   )
 }
