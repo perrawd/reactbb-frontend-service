@@ -93,7 +93,6 @@ const AddThread = () => {
   const onSubmit = event => {
     event.preventDefault()
 
-
     addPost({ variables: postValues })
     // eslint-disable-next-line no-console
     console.log("OK")
