@@ -18,22 +18,24 @@ const AddThread = () => {
     `
 
   const ADD_THREAD = gql`
-  mutation addPost(
-    $title: String!
-    $subcategory: String!
-    $posts: String!
-  ) {
-    addThread(
-      title: $title
-      subcategory: $subcategory
-      posts: $posts
+    mutation addThread(
+      $title: String!
+      $subtitle: String!
+      $subcategory: String!
+      $posts: String!
     ) {
-      title
-      posts {
+      addThread(
+        title: $title
+        subtitle: $subtitle
+        subcategory: $subcategory
+        posts: $posts
+      ) {
         title
+        posts {
+          title
+        }
       }
     }
-  }
   `
   // Const [errors, setErrors] = useState({})
 
@@ -41,7 +43,8 @@ const AddThread = () => {
 
   const [threadValues, setThreadValues] = useState({
     title: '',
-    subcategory: '6092c54da48d5d3e6d224d92',
+    subtitle: '',
+    subcategory: '60997c36a30bbedc2eea0da2',
     posts: ''
   })
 
@@ -66,6 +69,7 @@ const AddThread = () => {
     onCompleted (data) {
       addThread({ variables: {
         title: threadValues.title,
+        subtitle: threadValues.subtitle,
         subcategory: threadValues.subcategory,
         posts: data.addPost.id
     } })
@@ -107,6 +111,14 @@ const AddThread = () => {
           name="title"
           type="text"
           value={threadValues.title}
+          onChange={onThreadChange}
+        />
+        <Form.Input
+          label="Subtitle"
+          placeholder="Subtitle"
+          name="subtitle"
+          type="text"
+          value={threadValues.subtitle}
           onChange={onThreadChange}
         />
         <Form.Input

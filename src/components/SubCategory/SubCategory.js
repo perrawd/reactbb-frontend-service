@@ -9,7 +9,7 @@ export const SubCategory = props => {
         <Image src="./logo192.png" size="mini" />
       </Grid.Column>
       <Grid.Column width={7}>
-        <Link to={props.data.id}><h5>{props.data.title}</h5></Link>
+        <Link to={`/subcategories?sid=${props.data.id}`}><h5>{props.data.title}</h5></Link>
         {props.data.subtitle}
       </Grid.Column>
       <Grid.Column width={1} textAlign="center">

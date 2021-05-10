@@ -11,6 +11,7 @@ import ThreadsList from './components/ThreadList/ThreadList'
 import Register from './components/Register/Register'
 import Login from './components/Login/Login'
 import AddThread from './components/AddThread/AddThread'
+import Subcategory from './pages/Subcategory/SubCategory'
 
 import AuthRoute from './utils/AuthRoute'
 
@@ -25,6 +26,7 @@ const App = () => {
           <AuthRoute exact path="/register" component={Register} />
           <AuthRoute exact path="/login" component={Login} />
           <Route exact path="/addthread" component={AddThread} />
+          <Route exact path="/subcategories" component={Subcategory} />
         </Router>
       </Container>
     </AuthProvider>
