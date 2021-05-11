@@ -10,7 +10,7 @@ const Subcategory = props => {
   console.log(shortid)
 
   const GET_THREADS_QUERY = gql`
-    query {getSubCategoryByID(id:"6099922e76b57a786ceb08eb"){
+    query SubCategory($id: ID!) {getSubCategoryByID(id: $id){
     title
       threads {
       id
