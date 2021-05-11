@@ -1,6 +1,7 @@
 import React from 'react'
 import { gql, useQuery } from '@apollo/client'
 import ThreadPost from '../ThreadPost/ThreadPost'
+import ReplyThread from '../ReplyThread/ReplyThread'
 
 const Thread = props => {
   const queryParams = props.location.search
@@ -43,6 +44,7 @@ const Thread = props => {
       {posts.map(post => {
         return <ThreadPost key={post.id} data={post} />
       })}
+      <ReplyThread></ReplyThread>
     </div>
   )
 }
