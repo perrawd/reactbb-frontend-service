@@ -44,7 +44,7 @@ const Thread = props => {
       {posts.map(post => {
         return <ThreadPost key={post.id} data={post} />
       })}
-      <ReplyThread></ReplyThread>
+      <ReplyThread thread={shortid}></ReplyThread>
     </div>
   )
 }

@@ -2,21 +2,21 @@ import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form, TextArea } from 'semantic-ui-react'
 
-const ReplyThread = () => {
+const ReplyThread = props => {
 
   const [values, setValues] = useState({
       body: '',
-      author: 'testingfromfrontend'
+      thread: props.thread
     })
 
   const ADD_POST = gql`
     mutation addPost(
       $body: String!
-      $author: String!
+      $thread: String!
     ) {
       addPost(
-          body: $body
-          author: $author
+          body: $body,
+          thread: $thread
       ) {
         id
       }
