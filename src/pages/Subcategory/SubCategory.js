@@ -1,6 +1,7 @@
 import React from 'react'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Icon } from 'semantic-ui-react'
 import { gql, useQuery } from '@apollo/client'
+import { Link } from 'react-router-dom'
 
 const Subcategory = props => {
   const queryParams = props.location.search
@@ -9,13 +10,17 @@ const Subcategory = props => {
   console.log(shortid)
 
   const GET_THREADS_QUERY = gql`
-    query {
-    getThreads {
+    query {getSubCategoryByID(id:"6099922e76b57a786ceb08eb"){
     title
-   }
+      threads {
+      id
+      title
   }
+}}
 `
-  const { loading, error, data } = useQuery(GET_THREADS_QUERY)
+  const { loading, error, data } = useQuery(GET_THREADS_QUERY, {variables: {
+    id: shortid
+  }})
   // eslint-disable-next-line no-console
   console.log(data)
   if (loading) {
@@ -27,12 +32,18 @@ const Subcategory = props => {
     return `Error! ${error.message}`
   }
 
-  const threads = data.getThreads
+  const {threads} = data.getSubCategoryByID
   // eslint-disable-next-line no-console
   console.log(threads)
 
   return (
     <div>
+      <Link to={{
+        pathname: '/addthread',
+        state: { subcatid: shortid }
+      }}>
+        <Icon circular name="add" inverted color="green" link/>
+      </Link>
       <Grid celled>
         <Grid.Row>
           <Grid.Column width={8}>
@@ -49,7 +60,7 @@ const Subcategory = props => {
         {threads.map(thread => {
           return <Grid.Row key={thread.id}>
             <Grid.Column width={8}>
-              {thread.title}
+              <Link to={thread.id}>{thread.title}</Link>
             </Grid.Column>
             <Grid.Column width={1} textAlign="center">
               5

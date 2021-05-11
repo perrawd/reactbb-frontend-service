@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form, TextArea } from 'semantic-ui-react'
 
-const AddThread = () => {
+const AddThread = props => {
+  // eslint-disable-next-line no-console
+  console.log(props)
   const ADD_POST = gql`
     mutation addPost(
       $body: String!
@@ -44,7 +46,7 @@ const AddThread = () => {
   const [threadValues, setThreadValues] = useState({
     title: '',
     subtitle: '',
-    subcategory: '60997c36a30bbedc2eea0da2',
+    subcategory: '6099922e76b57a786ceb08eb',
     posts: ''
   })
 
