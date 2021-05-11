@@ -1,23 +1,24 @@
 import React from 'react'
-import { Grid } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 import { SubCategory } from '../SubCategory/SubCategory.js'
 
 const Category = props => {
   return (
     <div>
-      <Grid celled>
-        <Grid.Row>
-          <Grid.Column width={8}><h3>{props.data.title}</h3></Grid.Column>
-          <Grid.Column width={1} textAlign="center">Trådar</Grid.Column>
-          <Grid.Column width={1} textAlign="center">Inlägg</Grid.Column>
-          <Grid.Column width={6}>Senaste inlägg</Grid.Column>
-        </Grid.Row>
+      <Table celled>
+        <Table.Row>
+
+          <Table.Cell width={7} colSpan="2"><h3>{props.data.title}</h3></Table.Cell>
+          <Table.Cell width={1} textAlign="center">Trådar</Table.Cell>
+          <Table.Cell width={1} textAlign="center">Inlägg</Table.Cell>
+          <Table.Cell width={6}>Senaste inlägg</Table.Cell>
+        </Table.Row>
         {props.data.subcategories.map(subcategory => {
           return (
             <SubCategory data={subcategory} key={subcategory.id}></SubCategory>
           )
         })}
-      </Grid>
+      </Table>
     </div>
   )
 }
