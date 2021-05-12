@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Card, Image, Button } from 'semantic-ui-react'
 import moment from 'moment'
+import { AuthContext } from '../../context/auth'
 
 const ThreadPost = props => {
+  const { user } = useContext(AuthContext)
+  // eslint-disable-next-line no-console
+  console.log(user)
   const d = new Date(Number(props.data.createdAt))
   // eslint-disable-next-line no-console
   console.log(d)
+  // eslint-disable-next-line no-console
+  console.log(props)
   return (
     <Card raised={true} color="blue" centered fluid>
       <Card.Content>
@@ -15,13 +21,14 @@ const ThreadPost = props => {
           src={`https://semantic-ui.com/images/avatar2/large/mark.png`}
         />
         <Card.Header />
-        <Card.Meta>Posted by kalle</Card.Meta>
+        <Card.Meta>Posted by {props.data.author}</Card.Meta>
         <Card.Meta>On {moment(d).fromNow()}</Card.Meta>
         <Card.Description>{props.data.body}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <div>
           <Button
+            compact
             size="mini"
             color="red"
             content="Like"
@@ -34,6 +41,7 @@ const ThreadPost = props => {
             }}
           />
           <Button
+            compact
             basic
             size="mini"
             color="blue"
@@ -47,7 +55,13 @@ const ThreadPost = props => {
               content: '0'
             }}
           />
+          { user && user.sub.username === props.data.author &&
+          <Button basic compact color="yellow" floated="right">
+            Edit Post
+          </Button>
+        }
         </div>
+
       </Card.Content>
     </Card>
   )

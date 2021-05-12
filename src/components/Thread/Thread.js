@@ -6,6 +6,8 @@ import { AuthContext } from '../../context/auth'
 
 const Thread = props => {
   const { user } = useContext(AuthContext)
+  // eslint-disable-next-line no-console
+  console.log(user)
   const queryParams = props.location.search
   const shortid = new URLSearchParams(queryParams).get('sid')
 
@@ -18,6 +20,7 @@ const Thread = props => {
           body
           createdAt
           updatedAt
+          author
         }
       }
     }

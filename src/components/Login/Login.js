@@ -9,6 +9,7 @@ const LOGIN_USER = gql`
     login(username: $username, password: $password) {
       accessToken
       refreshToken
+      username
     }
   }
 `
