@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import ThreadPost from '../ThreadPost/ThreadPost'
 import ReplyThread from '../ReplyThread/ReplyThread'
+import { AuthContext } from '../../context/auth'
 
 const Thread = props => {
+  const { user } = useContext(AuthContext)
   const queryParams = props.location.search
   const shortid = new URLSearchParams(queryParams).get('sid')
 
@@ -14,6 +16,8 @@ const Thread = props => {
         posts {
           id
           body
+          createdAt
+          updatedAt
         }
       }
     }
@@ -44,7 +48,9 @@ const Thread = props => {
       {posts.map(post => {
         return <ThreadPost key={post.id} data={post} />
       })}
-      <ReplyThread thread={shortid}></ReplyThread>
+      {user &&
+        <ReplyThread thread={shortid}></ReplyThread>
+      }
     </div>
   )
 }

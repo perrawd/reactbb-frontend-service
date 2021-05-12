@@ -105,7 +105,7 @@ const AddThread = props => {
   }
 
   return (
-    <div>
+    <div className="form-container">
       <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <Form.Input
           label="Title"

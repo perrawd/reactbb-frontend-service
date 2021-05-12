@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Table, Icon } from 'semantic-ui-react'
 import { gql, useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../context/auth'
 
 const Subcategory = props => {
+  const { user } = useContext(AuthContext)
   const queryParams = props.location.search
   const shortid = new URLSearchParams(queryParams).get('sid')
   // eslint-disable-next-line no-console
@@ -42,14 +44,16 @@ const Subcategory = props => {
 
   return (
     <div>
-      <Link
-        to={{
-          pathname: '/addthread',
-          state: { subcatid: shortid }
-        }}
-      >
-        <Icon circular name="add" inverted color="green" link />
-      </Link>
+      {user &&
+        <Link
+          to={{
+            pathname: '/addthread',
+            state: { subcatid: shortid }
+          }}
+        >
+          <Icon circular name="add" inverted color="green" link />
+        </Link>
+      }
       <Table celled>
         <Table.Body>
           <Table.Row>
