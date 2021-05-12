@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Card, Image, Button } from 'semantic-ui-react'
 import moment from 'moment'
 import { AuthContext } from '../../context/auth'
+import { Link } from 'react-router-dom'
 
 const ThreadPost = props => {
   const { user } = useContext(AuthContext)
@@ -56,9 +57,14 @@ const ThreadPost = props => {
             }}
           />
           { user && user.sub.username === props.data.author &&
-          <Button basic compact color="yellow" floated="right">
-            Edit Post
-          </Button>
+          <Link to={{
+              pathname: `/editpost`,
+              state: props.data
+            }}>
+            <Button basic compact color="yellow" floated="right">
+              Edit Post
+            </Button>
+          </Link>
         }
         </div>
 

@@ -15,6 +15,7 @@ import Subcategory from './pages/Subcategory/SubCategory'
 import Thread from './components/Thread/Thread'
 
 import AuthRoute from './utils/AuthRoute'
+import EditPost from './pages/EditPost/EditPost'
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route exact path="/addthread" component={AddThread} />
           <Route exact path="/subcategories" component={Subcategory} />
           <Route exact path="/thread" component={Thread} />
+          <Route exact path="/editpost" component={EditPost} />
         </Router>
       </Container>
     </AuthProvider>
