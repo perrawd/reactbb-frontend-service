@@ -7,8 +7,14 @@ const EditPost = props => {
   console.log(props)
 
   const EDIT_POST = gql`
-  mutation {
-    editPost(id:"609c00dee653f97103a6eb25", body:"test edit"){
+  mutation editPost(
+      $id: ID!
+      $body: String!
+    ){
+    editPost(
+        id: $id
+        body: $body
+    ){
       success
     }
   }
@@ -32,6 +38,7 @@ const EditPost = props => {
   const onPostChange = event => {
     setPostValues({
       ...postValues,
+      id: props.location.state.id,
       [event.target.name]: event.target.value
     })
   }
