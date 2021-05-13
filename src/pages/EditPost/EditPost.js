@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react'
-import { Form, TextArea, Button } from 'semantic-ui-react'
+import { Form, TextArea, Button, Icon, Modal, Header } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
 import { AuthContext } from '../../context/auth'
 
 const EditPost = props => {
   const { user } = useContext(AuthContext)
+  const [open, setOpen] = useState(false)
   // eslint-disable-next-line no-console
   console.log(props)
 
@@ -88,7 +89,32 @@ const EditPost = props => {
         <Button primary type="submit">
           Edit Post
         </Button>
-        <Button basic color="red" onClick={deleteSubmit}>Delete Post</Button>
+        <Modal
+          basic
+          onClose={() => setOpen(false)}
+          onOpen={() => setOpen(true)}
+          open={open}
+          size="small"
+          trigger={<Button basic color="red">Delete post</Button>}
+        >
+          <Header icon>
+            <Icon name="trash alternate" />
+            Delete post
+          </Header>
+          <Modal.Content>
+            <p style={{ textAlign: "center" }}>
+              Are you sure that you want to delete this post? (This action is irreversible)
+            </p>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button basic color="yellow" inverted onClick={() => setOpen(false)}>
+              <Icon name="checkmark" /> Cancel
+            </Button>
+            <Button color="red" inverted onClick={deleteSubmit}>
+              <Icon name="remove" /> Delete
+            </Button>
+          </Modal.Actions>
+        </Modal>
       </Form>
     </div>
     : <h1>Unauthorized</h1>
