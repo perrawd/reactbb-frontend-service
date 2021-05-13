@@ -4,10 +4,12 @@ import { SubCategory } from '../SubCategory/SubCategory.js'
 
 const Category = props => {
   return (
-    <Table>
+    <Table fixed>
       <Table.Body>
         <Table.Row>
-          <Table.Cell width={7} colSpan="2">
+          <Table.Cell width={1} textAlign="center">
+          </Table.Cell>
+          <Table.Cell width={7}>
             <h3>{props.data.title}</h3>
           </Table.Cell>
           <Table.Cell width={1} textAlign="center">

@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, TextArea, Button } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
+import { AuthContext } from '../../context/auth'
 
 const EditPost = props => {
+  const { user } = useContext(AuthContext)
   // eslint-disable-next-line no-console
   console.log(props)
 
@@ -52,7 +54,8 @@ const EditPost = props => {
   }
 
   return (
-    <div>
+    user && user.sub.username === props.location.state.author
+    ? <div>
       <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <h1>Edit Post</h1>
         <Form.Input
@@ -64,9 +67,10 @@ const EditPost = props => {
           type="text"
         />
         <Button primary type="submit">Edit Post</Button>
-        <Button danger>Delete Post</Button>
+        <Button>Delete Post</Button>
       </Form>
     </div>
+    : <h1>Unauthorized</h1>
   )
 }
 

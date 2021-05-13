@@ -18,7 +18,9 @@ export const SubCategory = props => {
       <Table.Cell width={1} textAlign="center">
         10
       </Table.Cell>
-      <Table.Cell width={6}>{props.data.subtitle}</Table.Cell>
+      <Table.Cell width={6}>
+        {props.data.subtitle}
+      </Table.Cell>
     </Table.Row>
   )
 }
