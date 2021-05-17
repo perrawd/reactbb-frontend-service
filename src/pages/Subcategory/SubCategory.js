@@ -54,7 +54,7 @@ const Subcategory = props => {
           <Icon circular name="add" inverted color="green" link />
         </Link>
       }
-      <Table celled>
+      <Table celled sortable>
         <Table.Body>
           <Table.Row>
             <Table.Cell width={8}>

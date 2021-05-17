@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form, TextArea } from 'semantic-ui-react'
+import { useHistory } from 'react-router'
 
 const AddThread = props => {
+  const history = useHistory()
   // eslint-disable-next-line no-console
   console.log(props)
   const ADD_POST = gql`
@@ -32,6 +34,7 @@ const AddThread = props => {
         subcategory: $subcategory
         posts: $posts
       ) {
+        id
         title
         posts {
           title
@@ -46,7 +49,7 @@ const AddThread = props => {
   const [threadValues, setThreadValues] = useState({
     title: '',
     subtitle: '',
-    subcategory: '6099922e76b57a786ceb08eb',
+    subcategory: props.location.state.subcatid,
     posts: ''
   })
 
@@ -60,6 +63,7 @@ const AddThread = props => {
     onCompleted (data) {
       // eslint-disable-next-line no-console
       console.log(data)
+      history.push(`/thread?sid=${data.addThread.id}`)
     },
     onError (err) {
       // eslint-disable-next-line no-console

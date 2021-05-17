@@ -3,6 +3,7 @@
   "version": "1.0",
   "private": true,
   "description": "Frontend service for reactBB",
+  "homepage": "/reactbb/",
   "contributors": [
     "Per Rawdin <per.rawdin@student.lnu.se>"
   ],
