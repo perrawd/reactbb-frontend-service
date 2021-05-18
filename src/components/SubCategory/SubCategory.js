@@ -13,7 +13,7 @@ export const SubCategory = props => {
         {props.data.subtitle}
       </Table.Cell>
       <Table.Cell width={1} textAlign="center">
-        25
+        {props.data.threadCount}
       </Table.Cell>
       <Table.Cell width={1} textAlign="center">
         10

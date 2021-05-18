@@ -13,6 +13,7 @@ const GET_CATEGORIES_QUERY = gql`
         id
         title
         subtitle
+        threadCount
       }
     }
   }
