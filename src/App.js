@@ -6,6 +6,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Navbar from './components/NavBar/NavBar'
 import { AuthProvider } from './context/auth'
 
+import AuthRoute from './utils/AuthRoute'
+import ProtectedRoute from './utils/ProtectedRoute'
+import AdminRoute from './utils/AdminRoute'
+
 import { BoardList } from './components/BoardList/BoardList'
 import ThreadsList from './components/ThreadList/ThreadList'
 import Register from './components/Register/Register'
@@ -13,10 +17,9 @@ import Login from './components/Login/Login'
 import AddThread from './components/AddThread/AddThread'
 import Subcategory from './pages/Subcategory/SubCategory'
 import Thread from './components/Thread/Thread'
-
-import AuthRoute from './utils/AuthRoute'
-import ProtectedRoute from './utils/ProtectedRoute'
+import AdminPage from './pages/AdminPage/AdminPage'
 import EditPost from './pages/EditPost/EditPost'
+import Error403 from './pages/Error403/Error403'
 
 const App = () => {
   return (
@@ -24,6 +27,7 @@ const App = () => {
       <Container>
         <Router>
           <Navbar />
+          <Route exact path="/403" component={Error403} />
           <Route exact path="/" component={BoardList} />
           <Route exact path="/posts" component={ThreadsList} />
           <AuthRoute exact path="/register" component={Register} />
@@ -32,6 +36,7 @@ const App = () => {
           <Route exact path="/thread" component={Thread} />
           <ProtectedRoute exact path="/addthread" component={AddThread} />
           <ProtectedRoute exact path="/editpost" component={EditPost} />
+          <AdminRoute exact path="/admin" component={AdminPage} />
         </Router>
       </Container>
     </AuthProvider>
