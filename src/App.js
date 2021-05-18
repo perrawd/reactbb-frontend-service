@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import { Container } from 'semantic-ui-react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Navbar from './components/NavBar/NavBar'
 import { AuthProvider } from './context/auth'
@@ -19,6 +19,7 @@ import Subcategory from './pages/Subcategory/SubCategory'
 import Thread from './components/Thread/Thread'
 import AdminPage from './pages/AdminPage/AdminPage'
 import EditPost from './pages/EditPost/EditPost'
+import Error404 from './pages/Error404/Error404'
 import Error403 from './pages/Error403/Error403'
 
 const App = () => {
@@ -27,7 +28,7 @@ const App = () => {
       <Container>
         <Router>
           <Navbar />
-          <Route exact path="/403" component={Error403} />
+          <Switch>
           <Route exact path="/" component={BoardList} />
           <Route exact path="/posts" component={ThreadsList} />
           <AuthRoute exact path="/register" component={Register} />
@@ -37,6 +38,9 @@ const App = () => {
           <ProtectedRoute exact path="/addthread" component={AddThread} />
           <ProtectedRoute exact path="/editpost" component={EditPost} />
           <AdminRoute exact path="/admin" component={AdminPage} />
+          <Route exact path="/403" component={Error403} />
+          <Route exact path="*" component={Error404} />
+          </Switch>
         </Router>
       </Container>
     </AuthProvider>
