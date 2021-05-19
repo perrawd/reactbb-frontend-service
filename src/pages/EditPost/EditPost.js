@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { Redirect } from 'react-router-dom'
 import { Form, TextArea, Button, Icon, Modal, Header } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
 import { AuthContext } from '../../context/auth'
@@ -74,7 +75,7 @@ const EditPost = props => {
     })
   }
 
-  return user && user.sub.username === props.location.state.author
+  return user && (user.sub.role === 'MODERATOR' || user.sub.username === props.data.author)
   ? <div>
       <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <h1>Edit Post</h1>
@@ -117,7 +118,7 @@ const EditPost = props => {
         </Modal>
       </Form>
     </div>
-    : <h1>Unauthorized</h1>
+    : <Redirect to="/403" />
 }
 
 export default EditPost
