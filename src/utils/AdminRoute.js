@@ -7,15 +7,16 @@ const AdminRoute = ({ component: Component, ...rest }) => {
   const { user } = useContext(AuthContext)
 
   if (!user) {
-      return <Redirect to="/403" />
-    }
+    return <Redirect to="/404" />
+  }
 
   return (
     <Route
       {...rest}
       render={props => user.sub.role === 'MODERATOR' || user.sub.role === 'SUPERUSER'
       ? <Component {...props} />
-      : <Redirect to="/403" /> }
+      : <Redirect to="/403" />
+      }
     />
   )
 }

@@ -1,9 +1,11 @@
 import React from 'react'
+import { Icon } from 'semantic-ui-react'
 
 const Error403 = () => {
   return (
-    <div>
-      <h1>403 Forbidden - You are not allowed here !!!</h1>
+    <div style={{textAlign: 'center'}}>
+      <Icon name="ban" size="massive" />
+      <h2>403 Forbidden</h2>
     </div>
   )
 }

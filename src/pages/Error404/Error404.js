@@ -1,9 +1,11 @@
 import React from 'react'
+import { Icon } from 'semantic-ui-react'
 
 const Error404 = () => {
     return (
-        <div>
-            <h1>404 !!!</h1>
+        <div style={{textAlign: 'center'}}>
+            <Icon name="exclamation circle" size="massive" />
+            <h2>404 Page not found</h2>
         </div>
     )
 }
