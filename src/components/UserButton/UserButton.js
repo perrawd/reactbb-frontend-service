@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/auth'
 
 const UserButton = () => {
   const [activeItem, setActiveItem] = useState('')
-  const { logout } = useContext(AuthContext)
+  const { user, logout } = useContext(AuthContext)
   const handleItemClick = (e, { name }) => setActiveItem(name)
 
   return (
@@ -23,6 +23,14 @@ const UserButton = () => {
       hoverable
     >
       <Menu secondary vertical borderless compact>
+        {user.sub.role === 'MODERATOR' &&
+          <Menu.Item
+          name="admin"
+            active={activeItem === 'messages'}
+            onClick={handleItemClick}
+          >
+          </Menu.Item>
+        }
         <Menu.Item
           name="messages"
           active={activeItem === 'messages'}

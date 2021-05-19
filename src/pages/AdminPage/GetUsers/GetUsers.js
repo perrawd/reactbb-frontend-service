@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { gql, useQuery } from '@apollo/client'
-import { Table, Button, Label } from 'semantic-ui-react'
+import { Table, Button, Label, Modal, Header, Icon } from 'semantic-ui-react'
 
 const GET_USERS_QUERY = gql`
   query {
@@ -14,6 +14,7 @@ const GET_USERS_QUERY = gql`
 `
 
 const GetUsers = () => {
+  const [open, setOpen] = useState(false)
   const { loading, error, data } = useQuery(GET_USERS_QUERY)
   if (loading) {
     return 'Loading...'
@@ -32,7 +33,7 @@ const GetUsers = () => {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Registration Date</Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
+            <Table.HeaderCell />
             <Table.HeaderCell>Username</Table.HeaderCell>
             <Table.HeaderCell>E-mail address</Table.HeaderCell>
             <Table.HeaderCell>Delete user</Table.HeaderCell>
@@ -44,12 +45,53 @@ const GetUsers = () => {
             return (
               <Table.Row key={user.id}>
                 <Table.Cell>{user.createdAt}</Table.Cell>
-                <Table.Cell><Label color={user.role === 'USER' ? 'blue' : 'orange'}>{user.role}</Label></Table.Cell>
+                <Table.Cell>
+                  <Label color={user.role === 'USER' ? 'blue' : 'orange'}>
+                    {user.role}
+                  </Label>
+                </Table.Cell>
                 <Table.Cell>{user.username}</Table.Cell>
                 <Table.Cell>{user.id}</Table.Cell>
-                <Table.Cell><Button size="mini">Delete user</Button></Table.Cell>
+                <Table.Cell>
+                  <Modal
+                    basic
+                    onClose={() => setOpen(false)}
+                    onOpen={() => setOpen(true)}
+                    open={open}
+                    size="small"
+                    trigger={
+                      <Button size="mini" color="red">
+                        Remove user
+                      </Button>
+                    }
+                  >
+                    <Header icon>
+                      <Icon name="trash alternate" />
+                      Remove user
+                    </Header>
+                    <Modal.Content>
+                      <p style={{ textAlign: 'center' }}>
+                        Are you sure that you want to remove this user? (This
+                        action is irreversible)
+                      </p>
+                    </Modal.Content>
+                    <Modal.Actions>
+                      <Button
+                        basic
+                        color="yellow"
+                        inverted
+                        onClick={() => setOpen(false)}
+                      >
+                        <Icon name="checkmark" /> Cancel
+                      </Button>
+                      <Button color="red" inverted>
+                        <Icon name="remove" /> Delete
+                      </Button>
+                    </Modal.Actions>
+                  </Modal>
+                </Table.Cell>
               </Table.Row>
-          )
+            )
           })}
         </Table.Body>
       </Table>
