@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { Popup, Menu, Image } from 'semantic-ui-react'
 import { AuthContext } from '../../context/auth'
+import { Link } from 'react-router-dom'
 
 const UserButton = () => {
   const [activeItem, setActiveItem] = useState('')
   const { user, logout } = useContext(AuthContext)
+
   const handleItemClick = (e, { name }) => setActiveItem(name)
 
   return (
@@ -23,11 +25,12 @@ const UserButton = () => {
       hoverable
     >
       <Menu secondary vertical borderless compact>
-        {user.sub.role === 'MODERATOR' &&
+      {user.role === 'MODERATOR' &&
           <Menu.Item
           name="admin"
             active={activeItem === 'messages'}
-            onClick={handleItemClick}
+            as={Link}
+            to="/admin/"
           >
           </Menu.Item>
         }

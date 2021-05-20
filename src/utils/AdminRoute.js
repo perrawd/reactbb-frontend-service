@@ -13,7 +13,7 @@ const AdminRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props => user.sub.role === 'MODERATOR' || user.sub.role === 'SUPERUSER'
+      render={props => user.role === 'MODERATOR' || user.role === 'SUPERUSER'
       ? <Component {...props} />
       : <Redirect to="/403" />
       }

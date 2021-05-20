@@ -10,6 +10,7 @@ const LOGIN_USER = gql`
       accessToken
       refreshToken
       username
+      role
     }
   }
 `
@@ -37,6 +38,7 @@ const Login = () => {
     update (proxy, { data: { login: userData } }) {
       context.login(userData)
       history.push('/')
+      // Window.location.reload(false)
     },
     onError (err) {
       setErrors(err.graphQLErrors[0].extensions.exception.message)

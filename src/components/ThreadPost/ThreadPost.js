@@ -56,7 +56,7 @@ const ThreadPost = props => {
               content: '0'
             }}
           />
-          { user && (user.sub.role === 'MODERATOR' || user.sub.username === props.data.author) &&
+          { user && (user.role === 'MODERATOR' || user.username === props.data.author) &&
           <Link to={{
               pathname: `/editpost`,
               state: props.data

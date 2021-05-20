@@ -6,6 +6,8 @@ import UserButton from '../UserButton/UserButton'
 
 const NavBar = () => {
   const { user } = useContext(AuthContext)
+  // eslint-disable-next-line no-console
+  console.log(user)
   const { pathname } = window.location
   const path = pathname === '/' ? 'home' : pathname.substr(1)
 

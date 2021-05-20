@@ -5,7 +5,7 @@ import React, { useReducer, createContext } from 'react'
 const initialState = { user: null }
 
 if (localStorage.getItem('jwtToken')) {
-  const token = jwtDecode(localStorage.getItem('jwtToken'))
+  const token = jwtDecode(localStorage.getItem('jwtToken')).sub
 
   if (token.exp * 1000 < Date.now()) {
     localStorage.removeItem('jwtToken')
@@ -26,7 +26,7 @@ const authReducer = (state, action) => {
     case 'LOGIN':
       return {
         ...state,
-        user: action.payload
+        user: jwtDecode(localStorage.getItem('jwtToken')).sub
       }
     case 'LOGOUT':
       return {
