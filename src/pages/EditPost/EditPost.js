@@ -75,7 +75,7 @@ const EditPost = props => {
     })
   }
 
-  return user && (user.sub.role === 'MODERATOR' || user.sub.username === props.data.author)
+  return user && (user.role === 'MODERATOR' || user.username === props.data.author)
   ? <div>
       <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <h1>Edit Post</h1>

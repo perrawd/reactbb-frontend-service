@@ -1,6 +1,7 @@
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import GetUsers from './GetUsers/GetUsers'
+import GetPosts from './GetPosts/GetPosts'
 
 const panes = [
   { menuItem: 'Categories',
@@ -11,7 +12,7 @@ const panes = [
   render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
   { menuItem: 'Posts',
   // eslint-disable-next-line react/display-name
-  render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+  render: () => <Tab.Pane><GetPosts /></Tab.Pane> },
   { menuItem: 'Users',
   // eslint-disable-next-line react/display-name
   render: () => <Tab.Pane><GetUsers /></Tab.Pane> }
