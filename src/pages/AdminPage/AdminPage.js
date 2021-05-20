@@ -2,11 +2,12 @@ import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import GetUsers from './GetUsers/GetUsers'
 import GetPosts from './GetPosts/GetPosts'
+import AdminCategories from './AdminCategories/AdminCategories'
 
 const panes = [
   { menuItem: 'Categories',
   // eslint-disable-next-line react/display-name
-  render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
+  render: () => <Tab.Pane><AdminCategories /></Tab.Pane> },
   { menuItem: 'Subcategories',
   // eslint-disable-next-line react/display-name
   render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
