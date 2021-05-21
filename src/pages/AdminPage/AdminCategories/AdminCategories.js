@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import { Card, Button } from 'semantic-ui-react'
+import EditCategory from '../EditCategory/EditCategory'
 
 const GET_CATEGORIES_QUERY = gql`
   query {
     getCategories {
+      id
       title
       subtitle
-      id
+      author
       createdAt
+      updatedAt
       subcategories {
         id
         title
@@ -19,6 +22,9 @@ const GET_CATEGORIES_QUERY = gql`
 `
 
 const AdminCategories = () => {
+  const [activeCategory, setActiveCategory] = useState({})
+  const [editCategory, setEditCategory] = useState(false)
+
   const { loading, error, data } = useQuery(GET_CATEGORIES_QUERY)
   if (loading) {
     return 'Loading...'
@@ -27,12 +33,19 @@ const AdminCategories = () => {
     return `Error! ${error.message}`
   }
 
+  const handleOnClick = cat => {
+    setActiveCategory(cat)
+    setEditCategory(true)
+  }
+
   const categories = data.getCategories
   // eslint-disable-next-line no-console
   console.log(categories)
 
   return (
-    <div>
+    editCategory
+    ? <EditCategory category={activeCategory} handler={setEditCategory}/>
+    : <div>
     <Button basic color="green" size="small">Add a category</Button>
     <h5>To edit a category and its subcategories, click on Edit.</h5>
 
@@ -55,11 +68,11 @@ const AdminCategories = () => {
                   }
                 </Card.Description>
               </Card.Content>
-              <Card.Content extra>
-                  <Button color="yellow">
-                    Edit
-                  </Button>
-              </Card.Content>
+                <Card.Content extra>
+                    <Button color="yellow" onClick={() => handleOnClick(category)}>
+                      Edit
+                    </Button>
+                </Card.Content>
             </Card>
           )
         })}
