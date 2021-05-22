@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import { Card, Button } from 'semantic-ui-react'
-import EditCategory from '../EditCategory/EditCategory'
+import EditCategory from './EditCategory/EditCategory'
 
 const GET_CATEGORIES_QUERY = gql`
   query {
