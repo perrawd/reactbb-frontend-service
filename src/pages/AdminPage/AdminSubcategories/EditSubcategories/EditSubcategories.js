@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Table } from 'semantic-ui-react'
-import EditSubcategory from './EditSubCategory/EditSubCategory'
+import EditSubcategory from './EditSubcategory/EditSubcategory'
 
 const AddSubcategory = props => {
   const [activeSubcategory, setActiveSubcategory] = useState({})
@@ -13,7 +13,7 @@ const AddSubcategory = props => {
 
   return (
     editSubcategory
-    ? <EditSubcategory category={activeSubcategory} handler={setEditSubcategory}/>
+    ? <EditSubcategory subcategory={activeSubcategory} handler={setEditSubcategory}/>
     : <div>
       {props.categories.map(category => <div key={category.id} style={{ marginBottom: 15 }}>
           <h3>{category.title}</h3>
@@ -32,7 +32,7 @@ const AddSubcategory = props => {
                   <Table.Cell>{subcategory.createdAt}</Table.Cell>
                   <Table.Cell />
                   <Table.Cell>
-                  <Button size="mini" color="yellow" onClick={() => handleOnClick(category)}>
+                  <Button size="mini" color="yellow" onClick={() => handleOnClick(subcategory)}>
                       Edit
                     </Button>
                   </Table.Cell>
