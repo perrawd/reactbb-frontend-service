@@ -17,7 +17,7 @@ const EditCategory = props => {
 
   const DELETE_CATEGORY = gql`
     mutation deleteCategory($id: ID!){
-      deleteCategory(id: $ID) {
+      deleteCategory(id: $id) {
         success
       }
     }
@@ -101,7 +101,7 @@ const EditCategory = props => {
           open={open}
           size="small"
           trigger={
-            <Button basic color="red">
+            <Button type="button" basic color="red">
               Delete category
             </Button>
           }
