@@ -1,11 +1,8 @@
-import React, { useState, useContext } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { useState } from 'react'
 import { Form, TextArea, Button, Icon, Modal, Header } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
-import { AuthContext } from '../../../context/auth'
 
 const EditCategory = props => {
-  const { user } = useContext(AuthContext)
   const [open, setOpen] = useState(false)
   // eslint-disable-next-line no-console
   console.log(props)
@@ -76,9 +73,7 @@ const EditCategory = props => {
     })
   }
 
-  return user &&
-  user.role === 'MODERATOR'
-  ? <div>
+  return <div>
       <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <h1>Edit Category</h1>
         <Form.Input
@@ -141,7 +136,6 @@ const EditCategory = props => {
         <Button onClick={() => props.handler(false)}>Cancel</Button>
       </Form>
     </div>
-  : <Redirect to="/403" />
 }
 
 export default EditCategory
