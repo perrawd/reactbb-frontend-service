@@ -35,7 +35,6 @@ const AdminPage = () => {
   }
 
   const categories = data.getCategories
-  const { subcategories } = data.getCategories
   // eslint-disable-next-line no-console
   console.log(categories)
 
@@ -46,7 +45,7 @@ const AdminPage = () => {
     render: () => <Tab.Pane><AdminCategories categories={categories} /></Tab.Pane> },
     { menuItem: 'Subcategories',
     // eslint-disable-next-line react/display-name
-    render: () => <Tab.Pane><AdminSubcategories subcategories={subcategories} /></Tab.Pane> },
+    render: () => <Tab.Pane><AdminSubcategories categories={categories} /></Tab.Pane> },
     { menuItem: 'Posts',
     // eslint-disable-next-line react/display-name
     render: () => <Tab.Pane><GetPosts /></Tab.Pane> },
