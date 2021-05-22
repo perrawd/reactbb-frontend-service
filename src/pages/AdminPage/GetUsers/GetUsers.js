@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useQuery, useMutation } from '@apollo/client'
 import { Table, Button, Label, Modal, Header, Icon } from 'semantic-ui-react'
 
 const GET_USERS_QUERY = gql`
@@ -13,7 +13,31 @@ const GET_USERS_QUERY = gql`
   }
 `
 
+const DELETE_USER = gql`
+  mutation deleteUser($id: ID!) {
+  deleteUser(id: $id) {
+    success
+  }
+}
+`
+
 const GetUsers = () => {
+
+  const [userID, setUserID] = useState({
+    id: ''
+  })
+
+  const [deleteUser] = useMutation(DELETE_USER, {
+    onCompleted () {
+      // eslint-disable-next-line no-console
+      console.log('data ok')
+    },
+    onError (err) {
+      // eslint-disable-next-line no-console
+      console.error(err)
+    }
+  })
+
   const [open, setOpen] = useState(false)
   const { loading, error, data } = useQuery(GET_USERS_QUERY)
   if (loading) {
@@ -60,7 +84,7 @@ const GetUsers = () => {
                     open={open}
                     size="small"
                     trigger={
-                      <Button size="mini" color="red">
+                      <Button size="mini" color="red" onClick={() => setUserID(user.id)}>
                         Remove user
                       </Button>
                     }
@@ -84,8 +108,8 @@ const GetUsers = () => {
                       >
                         <Icon name="checkmark" /> Cancel
                       </Button>
-                      <Button color="red" inverted>
-                        <Icon name="remove" /> Delete
+                      <Button color="red" inverted onClick={() => deleteUser({ variables: { id: userID }})} >
+                        <Icon name="remove"/> Delete
                       </Button>
                     </Modal.Actions>
                   </Modal>

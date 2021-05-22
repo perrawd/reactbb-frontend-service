@@ -10,7 +10,7 @@ const ADD_SUBCATEGORY = gql`
   }
 `
 
-const AddCategory = props => {
+const AddSubcategory = props => {
   const categoryData = props.categories.map(category => {
       return {
           value: category.id,
@@ -94,4 +94,4 @@ const AddCategory = props => {
   )
 }
 
-export default AddCategory
+export default AddSubcategory
