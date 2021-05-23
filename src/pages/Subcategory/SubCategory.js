@@ -3,6 +3,7 @@ import { Table, Icon } from 'semantic-ui-react'
 import { gql, useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/auth'
+import moment from 'moment'
 
 const Subcategory = props => {
   const { user } = useContext(AuthContext)
@@ -18,6 +19,9 @@ const Subcategory = props => {
         threads {
           id
           title
+          author
+          postCount
+          updatedAt
         }
       }
     }
@@ -38,7 +42,8 @@ const Subcategory = props => {
     return `Error! ${error.message}`
   }
 
-  const { threads } = data.getSubCategoryByID
+  const threads = data.getSubCategoryByID.threads.slice().sort((a, b) => b.updatedAt - a.updatedAt)
+
   // eslint-disable-next-line no-console
   console.log(threads)
 
@@ -63,10 +68,10 @@ const Subcategory = props => {
             <Table.Cell width={1} textAlign="center">
               Posts
             </Table.Cell>
-            <Table.Cell width={1} textAlign="center">
-              Last post
+            <Table.Cell width={3} textAlign="center">
+              Posted by
             </Table.Cell>
-            <Table.Cell width={6}>Last post</Table.Cell>
+            <Table.Cell width={4}>Last updated</Table.Cell>
           </Table.Row>
           {threads.map(thread => {
             return (
@@ -75,12 +80,12 @@ const Subcategory = props => {
                   <Link to={`/thread?sid=${thread.id}`}>{thread.title}</Link>
                 </Table.Cell>
                 <Table.Cell width={1} textAlign="center">
-                  5
+                  {thread.postCount}
                 </Table.Cell>
                 <Table.Cell width={1} textAlign="center">
-                  3
+                {thread.author}
                 </Table.Cell>
-                <Table.Cell width={6}>Senaste inlägg</Table.Cell>
+                <Table.Cell width={6}>{moment(new Date(Number(thread.updatedAt))).fromNow()}</Table.Cell>
               </Table.Row>
             )
           })}
