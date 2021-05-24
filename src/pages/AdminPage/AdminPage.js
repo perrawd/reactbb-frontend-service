@@ -5,6 +5,7 @@ import GetPosts from './GetPosts/GetPosts'
 import AdminSubcategories from './AdminSubcategories/AdminSubcategories'
 import AdminCategories from './AdminCategories/AdminCategories'
 import { gql, useQuery } from '@apollo/client'
+import Statistics from './Statistics/Statistics'
 
 const GET_CATEGORIES_QUERY = gql`
   query {
@@ -40,6 +41,9 @@ const AdminPage = () => {
 
 
   const panes = [
+    { menuItem: 'Statistics',
+    // eslint-disable-next-line react/display-name
+    render: () => <Tab.Pane><Statistics categories={categories} /></Tab.Pane> },
     { menuItem: 'Categories',
     // eslint-disable-next-line react/display-name
     render: () => <Tab.Pane><AdminCategories categories={categories} /></Tab.Pane> },
