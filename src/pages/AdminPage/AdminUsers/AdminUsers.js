@@ -1,17 +1,7 @@
 import React, { useState } from 'react'
-import { gql, useQuery, useMutation } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
 import { Table, Button, Label, Modal, Header, Icon } from 'semantic-ui-react'
 
-const GET_USERS_QUERY = gql`
-  query {
-    getUsers {
-      id
-      role
-      username
-      createdAt
-    }
-  }
-`
 
 const DELETE_USER = gql`
   mutation deleteUser($id: ID!) {
@@ -21,8 +11,9 @@ const DELETE_USER = gql`
 }
 `
 
-const GetUsers = () => {
-
+const AdminUsers = props => {
+  // eslint-disable-next-line no-console
+  console.log(props)
   const [userID, setUserID] = useState({
     id: ''
   })
@@ -39,15 +30,8 @@ const GetUsers = () => {
   })
 
   const [open, setOpen] = useState(false)
-  const { loading, error, data } = useQuery(GET_USERS_QUERY)
-  if (loading) {
-    return 'Loading...'
-  }
-  if (error) {
-    return `Error! ${error.message}`
-  }
 
-  const users = data.getUsers
+  const {users} = props
   // eslint-disable-next-line no-console
   console.log(users)
 
@@ -57,7 +41,7 @@ const GetUsers = () => {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Registration Date</Table.HeaderCell>
-            <Table.HeaderCell />
+            <Table.HeaderCell>Role</Table.HeaderCell>
             <Table.HeaderCell>Username</Table.HeaderCell>
             <Table.HeaderCell>E-mail address</Table.HeaderCell>
             <Table.HeaderCell>Delete user</Table.HeaderCell>
@@ -123,4 +107,4 @@ const GetUsers = () => {
   )
 }
 
-export default GetUsers
+export default AdminUsers

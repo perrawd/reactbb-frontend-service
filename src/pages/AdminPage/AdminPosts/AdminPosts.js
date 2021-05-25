@@ -1,35 +1,12 @@
 import React from 'react'
-import { gql, useQuery } from '@apollo/client'
 import { Table } from 'semantic-ui-react'
 import moment from 'moment'
 
-const GET_POSTS_QUERY = gql`
-  query {
-    getPosts {
-      body
-      id
-      createdAt
-      thread {
-        title
-      }
-      author
-    }
-  }
-`
 
-const GetUsers = () => {
-
-  const { loading, error, data } = useQuery(GET_POSTS_QUERY)
-  if (loading) {
-    return 'Loading...'
-  }
-  if (error) {
-    return `Error! ${error.message}`
-  }
-
-  const posts = data.getPosts
+const GetUsers = props => {
   // eslint-disable-next-line no-console
-  console.log(posts)
+  console.log(props)
+  const {posts} = props
 
   return (
     <div>
