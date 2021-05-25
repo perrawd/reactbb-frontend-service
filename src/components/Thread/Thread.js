@@ -52,7 +52,7 @@ const Thread = props => {
         return <ThreadPost key={post.id} data={post} />
       })}
       {user &&
-        <ReplyThread thread={shortid}></ReplyThread>
+        <ReplyThread thread={shortid} query={GET_POST_QUERY}></ReplyThread>
       }
     </div>
   )

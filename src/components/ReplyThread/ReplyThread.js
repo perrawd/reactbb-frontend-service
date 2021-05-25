@@ -3,6 +3,8 @@ import { gql, useMutation } from '@apollo/client'
 import { Button, Form, TextArea } from 'semantic-ui-react'
 
 const ReplyThread = props => {
+  // eslint-disable-next-line no-console
+  console.log(props)
 
   const [values, setValues] = useState({
       body: '',
@@ -24,6 +26,11 @@ const ReplyThread = props => {
     `
 
   const [addPost, { loading }] = useMutation(ADD_POST, {
+    refetchQueries: [
+      { query: props.query,
+        variables: { id: props.thread } }
+    ],
+    awaitRefetchQueries: true,
     onCompleted (data) {
         // eslint-disable-next-line no-console
         console.log(data)
