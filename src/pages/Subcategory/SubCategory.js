@@ -53,7 +53,10 @@ const Subcategory = props => {
         <Link
           to={{
             pathname: '/addthread',
-            state: { subcatid: shortid }
+            state: {
+              subcatid: shortid,
+              query: GET_THREADS_QUERY
+            }
           }}
         >
           <Icon circular name="add" inverted color="green" link />

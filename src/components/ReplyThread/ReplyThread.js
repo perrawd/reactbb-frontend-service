@@ -53,6 +53,10 @@ const ReplyThread = props => {
     // eslint-disable-next-line no-console
     console.log(values)
     addPost({ variables: values })
+    setValues({
+      ...values,
+      body: ''
+    })
   }
 
   return (

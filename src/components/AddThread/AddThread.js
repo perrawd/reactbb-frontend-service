@@ -60,6 +60,10 @@ const AddThread = props => {
 
   // eslint-disable-next-line no-unused-vars
   const [addThread] = useMutation(ADD_THREAD, {
+    refetchQueries: [
+      { query: props.location.state.query,
+        variables: { id: props.location.state.subcatid } }
+    ],
     onCompleted (data) {
       // eslint-disable-next-line no-console
       console.log(data)
