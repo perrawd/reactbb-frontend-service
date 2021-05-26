@@ -28,6 +28,14 @@ const Thread = props => {
           body
           createdAt
           updatedAt
+          thread {
+            id
+          }
+          replyto {
+            id
+            body
+            author
+          }
           author
         }
       }
@@ -54,7 +62,6 @@ const Thread = props => {
   console.log(data)
 
   return (
-
     <div>
       <Breadcrumbs
         type={'thread'}
@@ -66,7 +73,7 @@ const Thread = props => {
         current={data.getThreadByID.title}/>
       <h3>{data.getThreadByID.title}</h3>
       {posts.map(post => {
-        return <ThreadPost key={post.id} data={post} />
+        return <ThreadPost key={post.id} data={post} query={GET_POST_QUERY}/>
       })}
       {user &&
         <ReplyThread thread={shortid} query={GET_POST_QUERY}></ReplyThread>

@@ -8,17 +8,23 @@ const ReplyThread = props => {
 
   const [values, setValues] = useState({
       body: '',
-      thread: props.thread
+      thread: props.thread,
+      replyto: props.post ? props.post.id : null
     })
+
+  // eslint-disable-next-line no-console
+  console.log(values)
 
   const ADD_POST = gql`
     mutation addPost(
       $body: String!
       $thread: String!
+      $replyto: ID
     ) {
       addPost(
           body: $body,
-          thread: $thread
+          thread: $thread,
+          replyto: $replyto
       ) {
         id
       }
@@ -57,6 +63,9 @@ const ReplyThread = props => {
       ...values,
       body: ''
     })
+    if (props.isreply) {
+      props.isreply(false)
+    }
   }
 
   return (
