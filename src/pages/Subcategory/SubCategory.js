@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Table, Icon } from 'semantic-ui-react'
+import { Table, Icon, Breadcrumb } from 'semantic-ui-react'
 import { gql, useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/auth'
@@ -16,6 +16,9 @@ const Subcategory = props => {
     query SubCategory($id: ID!) {
       getSubCategoryByID(id: $id) {
         title
+        category {
+          title
+        }
         threads {
           id
           title
@@ -49,6 +52,17 @@ const Subcategory = props => {
 
   return (
     <div>
+      <div style={{marginBottom: 15}}>
+      <Breadcrumb>
+        <Breadcrumb.Section link as={Link} to="/">Home</Breadcrumb.Section>
+        <Breadcrumb.Divider />
+        <Breadcrumb.Section link as={Link} to="/">{data.getSubCategoryByID.category.title}</Breadcrumb.Section>
+        <Breadcrumb.Divider />
+        <Breadcrumb.Section active>{data.getSubCategoryByID.title}
+        </Breadcrumb.Section>
+        <Breadcrumb.Divider />
+      </Breadcrumb>
+      </div>
       {user &&
         <Link
           to={{

@@ -3,6 +3,7 @@ import { gql, useQuery } from '@apollo/client'
 import ThreadPost from '../ThreadPost/ThreadPost'
 import ReplyThread from '../ReplyThread/ReplyThread'
 import { AuthContext } from '../../context/auth'
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 
 const Thread = props => {
   const { user } = useContext(AuthContext)
@@ -15,6 +16,13 @@ const Thread = props => {
     query Thread($id: ID!) {
       getThreadByID(id: $id) {
         title
+        subcategory {
+          id
+          title
+          category {
+            title
+          }
+        }
         posts {
           id
           body
@@ -46,7 +54,16 @@ const Thread = props => {
   console.log(data)
 
   return (
+
     <div>
+      <Breadcrumbs
+        type={'thread'}
+        category={data.getThreadByID.subcategory.category.title}
+        subcategory={{
+            id: data.getThreadByID.subcategory.id,
+            title: data.getThreadByID.subcategory.title
+          }}
+        current={data.getThreadByID.title}/>
       <h3>{data.getThreadByID.title}</h3>
       {posts.map(post => {
         return <ThreadPost key={post.id} data={post} />
