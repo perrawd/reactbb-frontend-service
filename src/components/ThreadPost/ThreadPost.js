@@ -1,11 +1,14 @@
-import React, { useContext } from 'react'
-import { Card, Image, Button } from 'semantic-ui-react'
+import React, { useContext, useState } from 'react'
+import { Card, Image, Button, Message } from 'semantic-ui-react'
 import moment from 'moment'
 import { AuthContext } from '../../context/auth'
 import { Link } from 'react-router-dom'
+import ReplyThread from '../ReplyThread/ReplyThread'
 
 const ThreadPost = props => {
   const { user } = useContext(AuthContext)
+
+  const [isReply, setIsReply] = useState(false)
   // eslint-disable-next-line no-console
   console.log(user)
   const d = new Date(Number(props.data.createdAt))
@@ -14,6 +17,7 @@ const ThreadPost = props => {
   // eslint-disable-next-line no-console
   console.log(props)
   return (
+    <div style={{marginBottom: 10}}>
     <Card raised={true} color="blue" centered fluid>
       <Card.Content>
         <Image
@@ -24,7 +28,16 @@ const ThreadPost = props => {
         <Card.Header />
         <Card.Meta>Posted by {props.data.author}</Card.Meta>
         <Card.Meta>On {moment(d).fromNow()}</Card.Meta>
-        <Card.Description>{props.data.body}</Card.Description>
+        <Card.Description>
+          {Boolean(props.data.replyto) && <Message size="mini" style={{marginBottom: 15}}>
+              <p style={{fontStyle: "italic"}}>This is a reply to the follow post by {props.data.replyto.author}</p>
+              <p>
+                {props.data.replyto.body}
+              </p>
+            </Message>
+            }
+          {props.data.body}
+          </Card.Description>
       </Card.Content>
       <Card.Content extra>
         <div>
@@ -55,6 +68,7 @@ const ThreadPost = props => {
               pointing: 'left',
               content: '0'
             }}
+            onClick={() => setIsReply(!isReply)}
           />
           { user && (user.role === 'MODERATOR' || user.username === props.data.author) &&
           <Link to={{
@@ -67,9 +81,10 @@ const ThreadPost = props => {
           </Link>
         }
         </div>
-
+        {isReply && <ReplyThread isreply={setIsReply} post={props.data} thread={props.data.thread.id} query={props.query}/>}
       </Card.Content>
     </Card>
+  </div>
   )
 }
 
