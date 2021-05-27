@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react'
-import { Card, Image, Button, Message } from 'semantic-ui-react'
+import { Card, Image, Button, Message, Icon } from 'semantic-ui-react'
 import moment from 'moment'
 import { AuthContext } from '../../context/auth'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import ReplyThread from '../ReplyThread/ReplyThread'
 
 const ThreadPost = props => {
   const { user } = useContext(AuthContext)
+  const history = useHistory()
 
   const [isReply, setIsReply] = useState(false)
   // eslint-disable-next-line no-console
@@ -30,7 +31,7 @@ const ThreadPost = props => {
         <Card.Meta>On {moment(d).fromNow()}</Card.Meta>
         <Card.Description>
           {Boolean(props.data.replyto) && <Message size="mini" style={{marginBottom: 15}}>
-              <p style={{fontStyle: "italic"}}>This is a reply to the follow post by {props.data.replyto.author}</p>
+              <p style={{fontStyle: "italic"}}>This is a reply to the following post by {props.data.replyto.author} on {props.data.createdAt}</p>
               <p>
                 {props.data.replyto.body}
               </p>
@@ -66,9 +67,9 @@ const ThreadPost = props => {
               basic: true,
               color: 'blue',
               pointing: 'left',
-              content: '0'
+              content: props.data.replies
             }}
-            onClick={() => setIsReply(!isReply)}
+            onClick={user ? () => setIsReply(!isReply) : () => history.push("/login")}
           />
           { user && (user.role === 'MODERATOR' || user.username === props.data.author) &&
           <Link to={{
@@ -76,6 +77,7 @@ const ThreadPost = props => {
               state: props.data
             }}>
             <Button basic compact color="yellow" floated="right">
+              <Icon name="edit outline" />
               Edit Post
             </Button>
           </Link>

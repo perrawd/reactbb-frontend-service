@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Table, Icon, Breadcrumb } from 'semantic-ui-react'
+import { Table, Icon, Breadcrumb, Button } from 'semantic-ui-react'
 import { gql, useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/auth'
@@ -73,7 +73,10 @@ const Subcategory = props => {
             }
           }}
         >
+          <Button basic color="green" size="tiny">
           <Icon circular name="add" inverted color="green" link />
+          Add thread
+          </Button>
         </Link>
       }
       <Table celled sortable>
