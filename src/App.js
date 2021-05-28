@@ -21,10 +21,12 @@ import AdminPage from './pages/AdminPage/AdminPage'
 import EditPost from './pages/EditPost/EditPost'
 import Error404 from './pages/Error404/Error404'
 import Error403 from './pages/Error403/Error403'
+import MessageProvider from './context/flashmessage'
 
 const App = () => {
   return (
     <AuthProvider>
+      <MessageProvider>
       <Container>
         <Router>
           <Navbar />
@@ -43,6 +45,7 @@ const App = () => {
           </Switch>
         </Router>
       </Container>
+      </MessageProvider>
     </AuthProvider>
   )
 }
