@@ -1,22 +1,31 @@
 import React, { createContext, useState, useEffect } from 'react'
 
-export const messageContext = createContext()
+export const MessageContext = createContext()
 
 const MessageProvider = props => {
-    const [message, setMessage] = useState("")
+
+    const [message, setMessage] = useState({
+        active: false,
+        message: "",
+        type: ""
+    })
 
     useEffect(() => {
-        if (message.length > 0) {
+        if (message.active) {
             setTimeout(() => {
-                setMessage("")
-            }, 10000)
+                setMessage({
+                    active: false,
+                    message: "",
+                    type: ""
+                })
+            }, 5000)
         }
     }, [message])
 
     return (
-        <messageContext.Provider value={[message, setMessage]}>
+        <MessageContext.Provider value={[message, setMessage]}>
             {props.children}
-        </messageContext.Provider>
+        </MessageContext.Provider>
     )
 }
 

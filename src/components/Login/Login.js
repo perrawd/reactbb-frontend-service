@@ -3,6 +3,7 @@ import { gql, useMutation } from '@apollo/client'
 import { useHistory } from 'react-router'
 import { Button, Form } from 'semantic-ui-react'
 import { AuthContext } from '../../context/auth'
+import { MessageContext } from '../../context/flashmessage'
 
 const LOGIN_USER = gql`
   mutation login($username: String!, $password: String!) {
@@ -17,6 +18,8 @@ const LOGIN_USER = gql`
 
 const Login = () => {
   const context = useContext(AuthContext)
+
+  const [, setMessage] = useContext(MessageContext)
 
   const history = useHistory()
 
@@ -37,6 +40,12 @@ const Login = () => {
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update (proxy, { data: { login: userData } }) {
       context.login(userData)
+
+      setMessage({
+        active: true,
+        message: "You are now logged in!!!!!!",
+        type: "green"
+      })
       history.push('/')
       // Window.location.reload(false)
     },

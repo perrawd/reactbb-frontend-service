@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react'
-import { Menu, Button, Message } from 'semantic-ui-react'
+import { Menu, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/auth'
 import UserButton from '../UserButton/UserButton'
-import { messageContext } from '../../context/flashmessage'
+import { MessageContext } from '../../context/flashmessage'
 
 const NavBar = () => {
   const { user } = useContext(AuthContext)
-  const [message, setMessage] = useContext(messageContext)
+  const [message, setMessage] = useContext(MessageContext)
   // eslint-disable-next-line no-console
   console.log(user)
   const { pathname } = window.location
@@ -36,11 +36,12 @@ const NavBar = () => {
         </Menu.Menu>
       </Menu>
       {
-        message.length > 0
-        ? <div><Message>{message}</Message></div>
-        : <div><p>No message :(</p>
-        <Button onClick={() => setMessage("Hello world context")}></Button>
-        </div>
+        message.active && <div style={{marginBottom: 10}}>
+          <Message onDismiss={() => setMessage({ active: false,
+            message: "",
+            type: ""})}
+            color={message.type}>{message.message}
+          </Message></div>
       }
     </div> : <div>
       <Menu pointing secondary style={divStyle}>
