@@ -36,6 +36,9 @@ const Thread = props => {
             body
             author
           }
+          likes {
+            username
+          }
           replies
           author
         }

@@ -4,6 +4,7 @@ import moment from 'moment'
 import { AuthContext } from '../../context/auth'
 import { Link, useHistory } from 'react-router-dom'
 import ReplyThread from '../ReplyThread/ReplyThread'
+import LikeButton from '../LikeButton/LikeButton'
 
 const ThreadPost = props => {
   const { user } = useContext(AuthContext)
@@ -71,6 +72,7 @@ const ThreadPost = props => {
             }}
             onClick={user ? () => setIsReply(!isReply) : () => history.push("/login")}
           />
+          <LikeButton user={user} post={props.data} query={props.query}>Like button</LikeButton>
           { user && (user.role === 'MODERATOR' || user.username === props.data.author) &&
           <Link to={{
               pathname: `/editpost`,
