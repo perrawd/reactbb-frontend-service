@@ -43,19 +43,11 @@ const ThreadPost = props => {
       </Card.Content>
       <Card.Content extra>
         <div>
-          <Button
-            compact
-            size="mini"
-            color="red"
-            content="Like"
-            icon="heart"
-            label={{
-              basic: true,
-              color: 'red',
-              pointing: 'left',
-              content: '1'
-            }}
-          />
+        <LikeButton
+          user={user}
+          post={props.data}
+          query={props.query}>
+        </LikeButton>
           <Button
             compact
             basic
@@ -72,7 +64,6 @@ const ThreadPost = props => {
             }}
             onClick={user ? () => setIsReply(!isReply) : () => history.push("/login")}
           />
-          <LikeButton user={user} post={props.data} query={props.query}>Like button</LikeButton>
           { user && (user.role === 'MODERATOR' || user.username === props.data.author) &&
           <Link to={{
               pathname: `/editpost`,

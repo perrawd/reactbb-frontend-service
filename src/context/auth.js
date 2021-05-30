@@ -5,12 +5,12 @@ import React, { useReducer, createContext } from 'react'
 const initialState = { user: null }
 
 if (localStorage.getItem('jwtToken')) {
-  const token = jwtDecode(localStorage.getItem('jwtToken')).sub
+  const token = jwtDecode(localStorage.getItem('jwtToken'))
 
   if (token.exp * 1000 < Date.now()) {
     localStorage.removeItem('jwtToken')
   } else {
-    initialState.user = token
+    initialState.user = token.sub
   }
 }
 

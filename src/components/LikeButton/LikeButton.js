@@ -15,6 +15,7 @@ const LikeButton = props => {
       }
     `
     const [liked, setLiked] = useState(false)
+    const [currentLikes, setCurrentLikes] = useState(props.post.likes.length)
 
     useEffect(() => {
         if (props.user && props.post.likes.find(like => like.username === props.user.username)) {
@@ -29,30 +30,33 @@ const LikeButton = props => {
               variables: { id: props.post.id } }
           ],
         onCompleted () {
-            setLiked(true)
+            setLiked(!liked)
+            if (liked) {
+              setCurrentLikes(currentLikes - 1)
+            } else {
+              setCurrentLikes(currentLikes + 1)
+            }
         }
       })
 
       const likeButton = props.user
-      ? liked ? <Button color="teal">
-            <Icon name="heart" />
+      ? liked
+      ? <Button compact color="red" size="mini" onClick={addLikes}>
+            <Icon name="heart" /> Like
           </Button>
-        : <Button color="teal" basic>
-            <Icon name="heart" />
+        : <Button compact color="red" size="mini" basic onClick={addLikes}>
+            <Icon name="heart" /> Like
           </Button>
-        : <Button as={Link} to="/login" color="teal" basic>
+        : <Button compact color="red" size="mini" as={Link} to="/login" basic>
           <Icon name="heart" />
         </Button>
 
-    return <div>
-                <Button as="div" labelPosition="right" onClick={addLikes}>
+    return <Button as="div" labelPosition="right">
       {likeButton}
-      <Label basic color="teal" pointing="left">
-        {props.post.likes.length}
+      <Label basic color="red" pointing="left">
+        {currentLikes}
       </Label>
     </Button>
-        </div>
-
 }
 
 export default LikeButton
