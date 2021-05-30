@@ -28,20 +28,22 @@ const UserButton = () => {
       {user.role === 'MODERATOR' &&
           <Menu.Item
           name="admin"
-            active={activeItem === 'messages'}
+            active={activeItem === 'admin'}
             as={Link}
             to="/admin/"
           >
           </Menu.Item>
         }
         <Menu.Item
-          name="messages"
-          active={activeItem === 'messages'}
+          disabled
+          name="feed"
+          active={activeItem === 'feed'}
           onClick={handleItemClick}
         />
         <Menu.Item
-          name="my account"
-          active={activeItem === 'my account'}
+          disabled
+          name="friends"
+          active={activeItem === 'friends'}
           onClick={handleItemClick}
         />
         <Menu.Item

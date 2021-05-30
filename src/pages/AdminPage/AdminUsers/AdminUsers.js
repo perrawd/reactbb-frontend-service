@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Table, Button, Label, Modal, Header, Icon } from 'semantic-ui-react'
-
+import moment from 'moment'
 
 const DELETE_USER = gql`
   mutation deleteUser($id: ID!) {
@@ -52,7 +52,7 @@ const AdminUsers = props => {
           {users.map(user => {
             return (
               <Table.Row key={user.id}>
-                <Table.Cell>{user.createdAt}</Table.Cell>
+                <Table.Cell>{moment(new Date(Number(user.createdAt))).format("YYYY-MM-DD HH:mm")}</Table.Cell>
                 <Table.Cell>
                   <Label color={user.role === 'USER' ? 'blue' : 'orange'}>
                     {user.role}

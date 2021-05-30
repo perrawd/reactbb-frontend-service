@@ -26,6 +26,7 @@ const GET_POSTS_QUERY = gql`
       createdAt
       thread {
         id
+        title
       }
       author
     }
