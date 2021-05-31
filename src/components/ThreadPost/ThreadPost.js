@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom'
 import ReplyThread from '../ReplyThread/ReplyThread'
 import LikeButton from '../LikeButton/LikeButton'
 
+
 const ThreadPost = props => {
   const { user } = useContext(AuthContext)
   const history = useHistory()
@@ -39,6 +40,14 @@ const ThreadPost = props => {
             </Message>
             }
           {props.data.body}
+          {props.data.isEdited && <p style={{fontStyle: "italic",
+          fontSize: "x-small",
+          marginTop: 15}
+          }>
+            {`This post was last edited on ${
+              moment(new Date(Number(props.data.updatedAt))).format("YYYY-MM-DD HH:mm")
+            }`}
+            </p>}
           </Card.Description>
       </Card.Content>
       <Card.Content extra>

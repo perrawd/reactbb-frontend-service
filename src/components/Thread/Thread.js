@@ -26,6 +26,7 @@ const Thread = props => {
         posts {
           id
           body
+          isEdited
           createdAt
           updatedAt
           thread {
