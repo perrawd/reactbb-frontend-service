@@ -3,10 +3,12 @@ import { Redirect, useHistory } from 'react-router-dom'
 import { Form, TextArea, Button, Icon, Modal, Header } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
 import { AuthContext } from '../../context/auth'
+import { MessageContext } from '../../context/flashmessage'
 
 const EditPost = props => {
   const history = useHistory()
   const { user } = useContext(AuthContext)
+  const [, setMessage] = useContext(MessageContext)
   const [open, setOpen] = useState(false)
   // eslint-disable-next-line no-console
   console.log(props)
@@ -40,6 +42,12 @@ const EditPost = props => {
     onCompleted (data) {
       // eslint-disable-next-line no-console
       console.log(data)
+
+      setMessage({
+        active: true,
+        message: "The post has been edited",
+        type: "yellow"
+      })
       // Lägg till refetch
       history.goBack()
     },
