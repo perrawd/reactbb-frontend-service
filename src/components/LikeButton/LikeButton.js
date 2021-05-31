@@ -47,9 +47,9 @@ const LikeButton = props => {
         : <Button compact color="red" size="mini" basic onClick={addLikes}>
             <Icon name="heart" /> Like
           </Button>
-        : <Button compact color="red" size="mini" as={Link} to="/login" basic>
-          <Icon name="heart" />
-        </Button>
+        : <Button compact color="red" size="mini" basic as={Link} to="/login">
+            <Icon name="heart" /> Like
+          </Button>
 
     return <Button as="div" labelPosition="right">
       {likeButton}
