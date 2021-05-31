@@ -59,7 +59,7 @@ const AdminUsers = props => {
                   </Label>
                 </Table.Cell>
                 <Table.Cell>{user.username}</Table.Cell>
-                <Table.Cell>{user.id}</Table.Cell>
+                <Table.Cell>{user.email}</Table.Cell>
                 <Table.Cell>
                   <Modal
                     basic

@@ -14,9 +14,7 @@ const ThreadPost = props => {
   const [isReply, setIsReply] = useState(false)
   // eslint-disable-next-line no-console
   console.log(user)
-  const d = new Date(Number(props.data.createdAt))
-  // eslint-disable-next-line no-console
-  console.log(d)
+  const createdAt = moment(new Date(Number(props.data.createdAt))).format("YYYY-MM-DD HH:mm")
   // eslint-disable-next-line no-console
   console.log(props)
   return (
@@ -30,10 +28,10 @@ const ThreadPost = props => {
         />
         <Card.Header />
         <Card.Meta>Posted by {props.data.author}</Card.Meta>
-        <Card.Meta>On {moment(d).fromNow()}</Card.Meta>
+        <Card.Meta>On {createdAt}</Card.Meta>
         <Card.Description>
           {Boolean(props.data.replyto) && <Message size="mini" style={{marginBottom: 15}}>
-              <p style={{fontStyle: "italic"}}>This is a reply to the following post by {props.data.replyto.author} on {props.data.createdAt}</p>
+              <p style={{fontStyle: "italic"}}>This is a reply to the following post by {props.data.replyto.author} on {createdAt}</p>
               <p>
                 {props.data.replyto.body}
               </p>
@@ -76,7 +74,8 @@ const ThreadPost = props => {
           { user && (user.role === 'MODERATOR' || user.username === props.data.author) &&
           <Link to={{
               pathname: `/editpost`,
-              state: props.data
+              state: {post: props.data,
+                      query: props.query}
             }}>
             <Button basic compact color="yellow" floated="right">
               <Icon name="edit outline" />

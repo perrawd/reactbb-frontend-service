@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { Form, TextArea, Button, Icon, Modal, Header } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
 import { AuthContext } from '../../context/auth'
 
 const EditPost = props => {
+  const history = useHistory()
   const { user } = useContext(AuthContext)
   const [open, setOpen] = useState(false)
   // eslint-disable-next-line no-console
@@ -27,13 +28,20 @@ const EditPost = props => {
   `
 
   const [postValues, setPostValues] = useState({
-    body: props.location.state.body
+    body: props.location.state.post.body
   })
 
   const [editPost, { loading }] = useMutation(EDIT_POST, {
+    refetchQueries: [
+      { query: props.location.state.query,
+        variables: { id: props.location.state.post.thread.id } }
+    ],
+    awaitRefetchQueries: true,
     onCompleted (data) {
       // eslint-disable-next-line no-console
       console.log(data)
+      // Lägg till refetch
+      history.goBack()
     },
     onError (err) {
       // eslint-disable-next-line no-console
@@ -45,6 +53,7 @@ const EditPost = props => {
     onCompleted (data) {
       // eslint-disable-next-line no-console
       console.log(data)
+      history.goBack()
     },
     onError (err) {
       // eslint-disable-next-line no-console
@@ -55,7 +64,7 @@ const EditPost = props => {
   const onPostChange = event => {
     setPostValues({
       ...postValues,
-      id: props.location.state.id,
+      id: props.location.state.post.id,
       isEdited: true,
       [event.target.name]: event.target.value
     })
@@ -72,11 +81,11 @@ const EditPost = props => {
   const deleteSubmit = event => {
     event.preventDefault()
     deletePost({
-      variables: { id: props.location.state.id }
+      variables: { id: props.location.state.post.id }
     })
   }
 
-  return user && (user.role === 'MODERATOR' || user.username === props.location.state.author)
+  return user && (user.role === 'MODERATOR' || user.username === props.location.state.post.author)
   ? <div>
       <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <h1>Edit Post</h1>
