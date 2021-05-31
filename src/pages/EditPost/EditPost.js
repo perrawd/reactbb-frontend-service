@@ -12,6 +12,10 @@ const EditPost = props => {
   const [open, setOpen] = useState(false)
   // eslint-disable-next-line no-console
   console.log(props)
+  const refetchQueryOptions = [
+    { query: props.location.state.query,
+      variables: { id: props.location.state.post.thread.id } }
+  ]
 
   const EDIT_POST = gql`
     mutation editPost($id: ID!, $body: String!, $isEdited: Boolean) {
@@ -34,10 +38,7 @@ const EditPost = props => {
   })
 
   const [editPost, { loading }] = useMutation(EDIT_POST, {
-    refetchQueries: [
-      { query: props.location.state.query,
-        variables: { id: props.location.state.post.thread.id } }
-    ],
+    refetchQueries: refetchQueryOptions,
     awaitRefetchQueries: true,
     onCompleted (data) {
       // eslint-disable-next-line no-console
@@ -58,7 +59,13 @@ const EditPost = props => {
   })
 
   const [deletePost] = useMutation(DELETE_POST, {
+    refetchQueries: refetchQueryOptions,
     onCompleted (data) {
+      setMessage({
+        active: true,
+        message: "The post has been deleted",
+        type: "red"
+      })
       // eslint-disable-next-line no-console
       console.log(data)
       history.goBack()
@@ -114,7 +121,7 @@ const EditPost = props => {
           onOpen={() => setOpen(true)}
           open={open}
           size="small"
-          trigger={<Button basic color="red">Delete post</Button>}
+          trigger={<Button basic color="red" type="button">Delete post</Button>}
         >
           <Header icon>
             <Icon name="trash alternate" />
@@ -129,7 +136,7 @@ const EditPost = props => {
             <Button basic color="yellow" inverted onClick={() => setOpen(false)}>
               <Icon name="checkmark" /> Cancel
             </Button>
-            <Button color="red" inverted onClick={deleteSubmit}>
+            <Button color="red" inverted onClick={e => deleteSubmit(e)}>
               <Icon name="remove" /> Delete
             </Button>
           </Modal.Actions>
