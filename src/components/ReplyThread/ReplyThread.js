@@ -2,48 +2,33 @@ import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form, TextArea } from 'semantic-ui-react'
 
+const ADD_POST = gql`
+  mutation addPost($body: String!, $thread: String!, $replyto: ID) {
+    addPost(body: $body, thread: $thread, replyto: $replyto) {
+      id
+    }
+  }
+`
+
 const ReplyThread = props => {
-  // eslint-disable-next-line no-console
-  console.log(props)
+  const [errors, setErrors] = useState({})
 
   const [values, setValues] = useState({
-      body: '',
-      thread: props.thread,
-      replyto: props.post ? props.post.id : null
-    })
-
-  // eslint-disable-next-line no-console
-  console.log(values)
-
-  const ADD_POST = gql`
-    mutation addPost(
-      $body: String!
-      $thread: String!
-      $replyto: ID
-    ) {
-      addPost(
-          body: $body,
-          thread: $thread,
-          replyto: $replyto
-      ) {
-        id
-      }
-    }
-    `
+    body: '',
+    thread: props.thread,
+    replyto: props.post ? props.post.id : null
+  })
 
   const [addPost, { loading }] = useMutation(ADD_POST, {
     refetchQueries: [
-      { query: props.query,
-        variables: { id: props.thread } }
+      {
+        query: props.query,
+        variables: { id: props.thread }
+      }
     ],
     awaitRefetchQueries: true,
-    onCompleted (data) {
-        // eslint-disable-next-line no-console
-        console.log(data)
-    },
     onError (err) {
-      // eslint-disable-next-line no-console
-      console.error(err)
+      setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
   })
 
@@ -82,6 +67,12 @@ const ReplyThread = props => {
         />
         <Button type="submit">Reply</Button>
       </Form>
+      {Object.keys(errors).length > 0 && <div className="ui error message">
+          <ul className="list">
+            <li>{errors}</li>
+          </ul>
+        </div>
+      }
     </div>
   )
 }

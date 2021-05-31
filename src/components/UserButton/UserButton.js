@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Popup, Menu, Image } from 'semantic-ui-react'
 import { AuthContext } from '../../context/auth'
-import { Link } from 'react-router-dom'
 
 const UserButton = () => {
   const [activeItem, setActiveItem] = useState('')
+
   const { user, logout } = useContext(AuthContext)
 
   const handleItemClick = (e, { name }) => setActiveItem(name)

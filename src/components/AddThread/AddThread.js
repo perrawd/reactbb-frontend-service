@@ -5,8 +5,9 @@ import { useHistory } from 'react-router'
 
 const AddThread = props => {
   const history = useHistory()
-  // eslint-disable-next-line no-console
-  console.log(props)
+
+  const [errors, setErrors] = useState({})
+
   const ADD_POST = gql`
     mutation addPost(
       $body: String!
@@ -42,9 +43,6 @@ const AddThread = props => {
       }
     }
   `
-  // Const [errors, setErrors] = useState({})
-
-  // Const [postID, setPostID] = useState('')
 
   const [threadValues, setThreadValues] = useState({
     title: '',
@@ -70,8 +68,12 @@ const AddThread = props => {
       history.push(`/thread?sid=${data.addThread.id}`)
     },
     onError (err) {
+      setErrors(err.graphQLErrors[0].extensions.exception.message)
+
       // eslint-disable-next-line no-console
-      console.error(err)
+      console.log('errroorr')
+      // eslint-disable-next-line no-console
+      console.error(err.graphQLErrors[0].extensions.exception.message)
     }
   })
 
@@ -106,10 +108,7 @@ const AddThread = props => {
 
   const onSubmit = event => {
     event.preventDefault()
-
     addPost({ variables: postValues })
-    // eslint-disable-next-line no-console
-    console.log("OK")
   }
 
   return (
@@ -142,6 +141,11 @@ const AddThread = props => {
         />
         <Button type="submit">Submit</Button>
       </Form>
+      {Object.keys(errors).length > 0 && <div className="ui error message">
+          <ul className="list">
+            <li>{errors}</li>
+          </ul>
+        </div>}
     </div>
   )
 }

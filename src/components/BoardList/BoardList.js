@@ -1,7 +1,7 @@
 import React from 'react'
 import { gql, useQuery } from '@apollo/client'
-import Category from '../Category/Category.js'
 
+import Category from '../Category/Category.js'
 
 const GET_CATEGORIES_QUERY = gql`
   query {
@@ -21,6 +21,7 @@ const GET_CATEGORIES_QUERY = gql`
 
 const BoardList = () => {
   const { loading, error, data } = useQuery(GET_CATEGORIES_QUERY)
+
   if (loading) {
     return 'Loading...'
   }
@@ -29,8 +30,6 @@ const BoardList = () => {
   }
 
   const categories = data.getCategories
-  // eslint-disable-next-line no-console
-  console.log(categories)
 
   return (
     <div>

@@ -1,6 +1,6 @@
-import { gql, useMutation } from '@apollo/client'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
+import { gql, useMutation } from '@apollo/client'
 import { Button, Form } from 'semantic-ui-react'
 
 const REGISTER_USER = gql`

@@ -43,11 +43,10 @@ const Login = () => {
 
       setMessage({
         active: true,
-        message: "You are now logged in!!!!!!",
+        message: "You are now logged in.",
         type: "green"
       })
-      history.push('/')
-      // Window.location.reload(false)
+      history.goBack()
     },
     onError (err) {
       setErrors(err.graphQLErrors[0].extensions.exception.message)

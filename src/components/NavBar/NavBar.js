@@ -8,8 +8,7 @@ import { MessageContext } from '../../context/flashmessage'
 const NavBar = () => {
   const { user } = useContext(AuthContext)
   const [message, setMessage] = useContext(MessageContext)
-  // eslint-disable-next-line no-console
-  console.log(user)
+
   const { pathname } = window.location
   const path = pathname === '/' ? 'home' : pathname.substr(1)
 
@@ -21,8 +20,7 @@ const NavBar = () => {
     marginBottom: 10
   }
 
-  const navBar = user
-  ? <div>
+  return user ? <div>
       <Menu pointing secondary style={divStyle}>
         <Menu.Item
           name="home"
@@ -35,15 +33,21 @@ const NavBar = () => {
           <UserButton />
         </Menu.Menu>
       </Menu>
-      {
-        message.active && <div style={{marginBottom: 10}}>
-          <Message onDismiss={() => setMessage({ active: false,
-            message: "",
-            type: ""})}
-            color={message.type}>{message.message}
-          </Message></div>
+      {message.active && <div style={{ marginBottom: 10 }}>
+          <Message
+            onDismiss={() => setMessage({
+                active: false,
+                message: '',
+                type: ''
+              })}
+            color={message.type}
+          >
+            {message.message}
+          </Message>
+        </div>
       }
-    </div> : <div>
+    </div>
+    : <div>
       <Menu pointing secondary style={divStyle}>
         <Menu.Item
           name="home"
@@ -72,8 +76,6 @@ const NavBar = () => {
         </Menu.Menu>
       </Menu>
     </div>
-
-  return navBar
 }
 
 export default NavBar

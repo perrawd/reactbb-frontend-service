@@ -1,22 +1,22 @@
 import React, { useContext, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { Card, Image, Button, Message, Icon } from 'semantic-ui-react'
 import moment from 'moment'
+
 import { AuthContext } from '../../context/auth'
-import { Link, useHistory } from 'react-router-dom'
 import ReplyThread from '../ReplyThread/ReplyThread'
 import LikeButton from '../LikeButton/LikeButton'
 
 
 const ThreadPost = props => {
   const { user } = useContext(AuthContext)
+
   const history = useHistory()
 
   const [isReply, setIsReply] = useState(false)
-  // eslint-disable-next-line no-console
-  console.log(user)
+
   const createdAt = moment(new Date(Number(props.data.createdAt))).format("YYYY-MM-DD HH:mm")
-  // eslint-disable-next-line no-console
-  console.log(props)
+
   return (
     <div style={{marginBottom: 10}}>
     <Card raised={true} color="blue" centered fluid>
@@ -67,7 +67,8 @@ const ThreadPost = props => {
               basic: true,
               color: 'blue',
               pointing: 'left',
-              content: props.data.replies
+              content: props.data.replies,
+              size: "mini"
             }}
             onClick={user ? () => setIsReply(!isReply) : () => history.push("/login")}
           />

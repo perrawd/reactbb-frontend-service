@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import { Breadcrumb } from 'semantic-ui-react'
 
 const Breadcrumbs = props => {
-  // eslint-disable-next-line no-console
-  console.log(props)
+
   return (
     <div>
       <Breadcrumb>

@@ -9,7 +9,9 @@ export const SubCategory = props => {
         <Image src="./logo192.png" size="mini" />
       </Table.Cell>
       <Table.Cell width={7}>
-        <Link to={`/subcategories?sid=${props.data.id}`}><h5>{props.data.title}</h5></Link>
+        <Link to={`/subcategories?sid=${props.data.id}`}>
+          <h5>{props.data.title}</h5>
+        </Link>
         {props.data.subtitle}
       </Table.Cell>
       <Table.Cell width={1} textAlign="center">
@@ -18,9 +20,7 @@ export const SubCategory = props => {
       <Table.Cell width={1} textAlign="center">
         10
       </Table.Cell>
-      <Table.Cell width={6}>
-        {props.data.subtitle}
-      </Table.Cell>
+      <Table.Cell width={6}>{props.data.subtitle}</Table.Cell>
     </Table.Row>
   )
 }
