@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form } from 'semantic-ui-react'
+import { MessageContext } from '../../../../context/flashmessage'
 
 const ADD_CATEGORY = gql`
   mutation addCategory($title: String!, $subtitle: String) {
@@ -12,14 +13,20 @@ const ADD_CATEGORY = gql`
 `
 
 const AddCategory = () => {
+  const [errors, setErrors] = useState({})
+
+  const [, setMessage] = useContext(MessageContext)
+
   const [addCategory] = useMutation(ADD_CATEGORY, {
     onCompleted () {
-      // eslint-disable-next-line no-console
-      console.log('data ok')
+      setMessage({
+        active: true,
+        message: "Category has been added.",
+        type: "green"
+      })
     },
     onError (err) {
-      // eslint-disable-next-line no-console
-      console.error(err)
+      setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
   })
 
@@ -37,10 +44,7 @@ const AddCategory = () => {
 
   const onSubmit = event => {
     event.preventDefault()
-
     addCategory({ variables: postValues })
-    // eslint-disable-next-line no-console
-    console.log('OK')
   }
 
   return (
@@ -63,6 +67,12 @@ const AddCategory = () => {
         />
         <Button type="submit">Submit</Button>
       </Form>
+      {Object.keys(errors).length > 0 && <div className="ui error message">
+          <ul className="list">
+            <li>{errors}</li>
+          </ul>
+        </div>
+      }
     </div>
   )
 }

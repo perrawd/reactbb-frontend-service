@@ -2,8 +2,6 @@ import React from 'react'
 import { Table, Statistic } from 'semantic-ui-react'
 
 const Statistics = props => {
-  // eslint-disable-next-line no-console
-  console.log(props.categories.map(category => category.subcategories.length))
   return <div>
     <Table fixed textAlign="center" style={{width: 400,
       marginLeft: "auto",

@@ -39,6 +39,7 @@ const GET_USERS_QUERY = gql`
       id
       role
       username
+      email
       createdAt
     }
   }

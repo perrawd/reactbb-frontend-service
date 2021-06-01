@@ -1,27 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, TextArea, Button, Icon, Modal, Header } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
+import { MessageContext } from '../../../../../context/flashmessage'
+
+const EDIT_SUBCATEGORY = gql`
+  mutation editSubcategory($id: ID!, $title: String, $subtitle: String) {
+    editSubcategory(id: $id, title: $title, subtitle: $subtitle) {
+      success
+    }
+  }
+`
+
+const DELETE_SUBCATEGORY = gql`
+  mutation deleteSubcategory($id: ID!) {
+    deleteSubcategory(id: $id) {
+      success
+    }
+  }
+`
 
 const EditSubcategory = props => {
+  const [errors, setErrors] = useState({})
+
+  const [, setMessage] = useContext(MessageContext)
+
   const [open, setOpen] = useState(false)
-  // eslint-disable-next-line no-console
-  console.log(props)
-
-  const EDIT_SUBCATEGORY = gql`
-    mutation editSubcategory($id: ID!, $title: String, $subtitle: String) {
-        editSubcategory(id: $id, title: $title, subtitle: $subtitle) {
-        success
-      }
-    }
-  `
-
-  const DELETE_SUBCATEGORY = gql`
-    mutation deleteSubcategory($id: ID!){
-        deleteSubcategory(id: $id) {
-        success
-      }
-    }
-  `
 
   const [postValues, setPostValues] = useState({
     title: props.subcategory.title,
@@ -29,24 +32,28 @@ const EditSubcategory = props => {
   })
 
   const [editCategory, { loading }] = useMutation(EDIT_SUBCATEGORY, {
-    onCompleted (data) {
-      // eslint-disable-next-line no-console
-      console.log(data)
+    onCompleted () {
+      setMessage({
+        active: true,
+        message: 'Subcategory has been updated.',
+        type: 'green'
+      })
     },
     onError (err) {
-      // eslint-disable-next-line no-console
-      console.error(err)
+      setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
   })
 
   const [deletePost] = useMutation(DELETE_SUBCATEGORY, {
-    onCompleted (data) {
-      // eslint-disable-next-line no-console
-      console.log(data)
+    onCompleted () {
+      setMessage({
+        active: true,
+        message: 'Subcategory has been deleted.',
+        type: 'red'
+      })
     },
     onError (err) {
-      // eslint-disable-next-line no-console
-      console.error(err)
+      setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
   })
 
@@ -60,10 +67,7 @@ const EditSubcategory = props => {
 
   const onSubmit = event => {
     event.preventDefault()
-
     editCategory({ variables: postValues })
-    // eslint-disable-next-line no-console
-    console.log('OK')
   }
 
   const deleteSubmit = event => {
@@ -73,7 +77,8 @@ const EditSubcategory = props => {
     })
   }
 
-  return <div>
+  return (
+    <div>
       <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <h1>Edit Subcategory</h1>
         <Form.Input
@@ -112,8 +117,8 @@ const EditSubcategory = props => {
           </Header>
           <Modal.Content>
             <p style={{ textAlign: 'center' }}>
-              Are you sure that you want to delete this category? (This action is
-              irreversible)
+              Are you sure that you want to delete this category? (This action
+              is irreversible)
             </p>
             <p style={{ textAlign: 'center' }}>
               ALL SUBCATEGORIES AND POSTS WILL BE REMOVED AS WELL, ARE YOU SURE?
@@ -135,7 +140,14 @@ const EditSubcategory = props => {
         </Modal>
         <Button onClick={() => props.handler(false)}>Cancel</Button>
       </Form>
+      {Object.keys(errors).length > 0 && <div className="ui error message">
+          <ul className="list">
+            <li>{errors}</li>
+          </ul>
+        </div>
+      }
     </div>
+  )
 }
 
 export default EditSubcategory

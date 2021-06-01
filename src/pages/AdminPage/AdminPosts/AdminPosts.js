@@ -1,12 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Table } from 'semantic-ui-react'
 import moment from 'moment'
-import { Link } from 'react-router-dom'
-
 
 const GetUsers = props => {
-  // eslint-disable-next-line no-console
-  console.log(props)
   const {posts} = props
 
   return (

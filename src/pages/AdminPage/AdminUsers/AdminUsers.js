@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Table, Button, Label, Modal, Header, Icon } from 'semantic-ui-react'
 import moment from 'moment'
+import { MessageContext } from '../../../context/flashmessage'
 
 const DELETE_USER = gql`
   mutation deleteUser($id: ID!) {
@@ -12,28 +13,31 @@ const DELETE_USER = gql`
 `
 
 const AdminUsers = props => {
-  // eslint-disable-next-line no-console
-  console.log(props)
+  const [errors, setErrors] = useState({})
+
+  const [, setMessage] = useContext(MessageContext)
+
+  const [open, setOpen] = useState(false)
+
   const [userID, setUserID] = useState({
     id: ''
   })
 
   const [deleteUser] = useMutation(DELETE_USER, {
     onCompleted () {
-      // eslint-disable-next-line no-console
-      console.log('data ok')
+      setOpen(false)
+      setMessage({
+        active: true,
+        message: 'User has been removed.',
+        type: 'red'
+      })
     },
     onError (err) {
-      // eslint-disable-next-line no-console
-      console.error(err)
+      setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
   })
 
-  const [open, setOpen] = useState(false)
-
   const {users} = props
-  // eslint-disable-next-line no-console
-  console.log(users)
 
   return (
     <div>
@@ -103,6 +107,12 @@ const AdminUsers = props => {
           })}
         </Table.Body>
       </Table>
+      {Object.keys(errors).length > 0 && <div className="ui error message">
+          <ul className="list">
+            <li>{errors}</li>
+          </ul>
+        </div>
+      }
     </div>
   )
 }

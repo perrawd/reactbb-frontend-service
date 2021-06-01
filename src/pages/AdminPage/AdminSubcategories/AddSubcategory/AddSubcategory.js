@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form } from 'semantic-ui-react'
+import { MessageContext } from '../../../../context/flashmessage'
 
 const ADD_SUBCATEGORY = gql`
   mutation addSubCategory($title: String!, $subtitle: String, $category: ID) {
@@ -11,21 +12,27 @@ const ADD_SUBCATEGORY = gql`
 `
 
 const AddSubcategory = props => {
+  const [, setMessage] = useContext(MessageContext)
+
+  const [errors, setErrors] = useState({})
+
   const categoryData = props.categories.map(category => {
-      return {
-          value: category.id,
-          text: category.title
-  }
-})
+    return {
+      value: category.id,
+      text: category.title
+    }
+  })
 
   const [addSubcategory] = useMutation(ADD_SUBCATEGORY, {
     onCompleted () {
-      // eslint-disable-next-line no-console
-      console.log('data ok')
+      setMessage({
+        active: true,
+        message: 'Subcategory has been added.',
+        type: 'green'
+      })
     },
     onError (err) {
-      // eslint-disable-next-line no-console
-      console.error(err)
+      setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
   })
 
@@ -35,9 +42,7 @@ const AddSubcategory = props => {
     category: ''
   })
 
-  const onPostChange = (event, value) => {
-    // eslint-disable-next-line no-console
-    console.log(value)
+  const onPostChange = event => {
     setPostValues({
       ...postValues,
       [event.target.name]: event.target.value
@@ -45,8 +50,6 @@ const AddSubcategory = props => {
   }
 
   const selectCategory = (event, value) => {
-    // eslint-disable-next-line no-console
-    console.log(value)
     setPostValues({
       ...postValues,
       category: value
@@ -55,11 +58,7 @@ const AddSubcategory = props => {
 
   const onSubmit = event => {
     event.preventDefault()
-    // eslint-disable-next-line no-console
-    console.log(postValues)
     addSubcategory({ variables: postValues })
-    // eslint-disable-next-line no-console
-    console.log('OK')
   }
 
   return (
@@ -81,15 +80,21 @@ const AddSubcategory = props => {
           type="text"
         />
         <Form.Select
-            fluid
-            onChange={(e, { value }) => selectCategory(e, value)}
-            name="category"
-            label="Category"
-            options={categoryData}
-            placeholder="Category"
+          fluid
+          onChange={(e, { value }) => selectCategory(e, value)}
+          name="category"
+          label="Category"
+          options={categoryData}
+          placeholder="Category"
         />
         <Button type="submit">Submit</Button>
       </Form>
+      {Object.keys(errors).length > 0 && <div className="ui error message">
+          <ul className="list">
+            <li>{errors}</li>
+          </ul>
+        </div>
+      }
     </div>
   )
 }
