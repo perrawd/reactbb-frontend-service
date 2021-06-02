@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form } from 'semantic-ui-react'
 import { MessageContext } from '../../../../context/flashmessage'
+import { GET_CATEGORIES_QUERY } from '../../useMultipleQueries.js'
 
 const ADD_CATEGORY = gql`
   mutation addCategory($title: String!, $subtitle: String) {
@@ -17,8 +18,18 @@ const AddCategory = () => {
 
   const [, setMessage] = useContext(MessageContext)
 
+  const [postValues, setPostValues] = useState({
+    title: '',
+    subtitle: ''
+  })
+
   const [addCategory] = useMutation(ADD_CATEGORY, {
+    refetchQueries: [{ query: GET_CATEGORIES_QUERY }],
     onCompleted () {
+      setPostValues({
+        title: '',
+        subtitle: ''
+      })
       setMessage({
         active: true,
         message: "Category has been added.",
@@ -28,11 +39,6 @@ const AddCategory = () => {
     onError (err) {
       setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
-  })
-
-  const [postValues, setPostValues] = useState({
-    title: '',
-    subtitle: ''
   })
 
   const onPostChange = event => {

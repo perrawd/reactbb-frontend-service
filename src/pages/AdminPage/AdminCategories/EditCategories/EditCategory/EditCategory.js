@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Form, TextArea, Button, Icon, Modal, Header } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
 import { MessageContext } from '../../../../../context/flashmessage'
+import { GET_CATEGORIES_QUERY } from '../../../useMultipleQueries'
 
 const EDIT_CATEGORY = gql`
   mutation editCategory($id: ID!, $title: String, $subtitle: String) {
@@ -31,8 +32,13 @@ const EditCategory = props => {
     subtitle: props.category.subtitle
   })
 
+  const queryOptions = [{ query: GET_CATEGORIES_QUERY }]
+
   const [editCategory, { loading }] = useMutation(EDIT_CATEGORY, {
+    refetchQueries: queryOptions,
     onCompleted () {
+      setOpen(false)
+      props.handler(false)
       setMessage({
         active: true,
         message: 'Subcategory has been updated.',
@@ -45,7 +51,10 @@ const EditCategory = props => {
   })
 
   const [deletePost] = useMutation(DELETE_CATEGORY, {
+    refetchQueries: queryOptions,
     onCompleted () {
+      setOpen(false)
+      props.handler(false)
       setMessage({
         active: true,
         message: 'Category has been deleted.',
