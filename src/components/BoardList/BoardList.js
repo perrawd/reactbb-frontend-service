@@ -14,6 +14,12 @@ const GET_CATEGORIES_QUERY = gql`
         title
         subtitle
         threadCount
+        latest {
+          id
+          title
+          createdAt
+          author
+        }
       }
     }
   }

@@ -56,24 +56,16 @@ const AddThread = props => {
     author: 'testingfromfrontend'
   })
 
-  // eslint-disable-next-line no-unused-vars
   const [addThread] = useMutation(ADD_THREAD, {
     refetchQueries: [
       { query: props.location.state.query,
         variables: { id: props.location.state.subcatid } }
     ],
     onCompleted (data) {
-      // eslint-disable-next-line no-console
-      console.log(data)
       history.push(`/thread?sid=${data.addThread.id}`)
     },
     onError (err) {
       setErrors(err.graphQLErrors[0].extensions.exception.message)
-
-      // eslint-disable-next-line no-console
-      console.log('errroorr')
-      // eslint-disable-next-line no-console
-      console.error(err.graphQLErrors[0].extensions.exception.message)
     }
   })
 
@@ -87,8 +79,7 @@ const AddThread = props => {
     } })
     },
     onError (err) {
-      // eslint-disable-next-line no-console
-      console.error(err)
+      setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
   })
 
