@@ -18,7 +18,7 @@ export const GET_CATEGORIES_QUERY = gql`
   }
 `
 
-const GET_POSTS_QUERY = gql`
+export const GET_POSTS_QUERY = gql`
   query {
     getPosts {
       body
