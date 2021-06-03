@@ -6,7 +6,7 @@ import moment from 'moment'
 
 import { AuthContext } from '../../context/auth'
 
-const GET_THREADS_QUERY = gql`
+export const GET_THREADS_QUERY = gql`
 query SubCategory($id: ID!) {
   getSubCategoryByID(id: $id) {
     title

@@ -24,10 +24,13 @@ const GetUsers = props => {
             <Table.Row key={post.id}>
               <Table.Cell>{post.body.slice(0, 10)}</Table.Cell>
               <Table.Cell>{post.author}</Table.Cell>
-              <Table.Cell><Link
-              to={`/thread?sid=${post.thread.id}`}>
+              <Table.Cell>
+                {post.thread ? <Link to={`/thread?sid=${post.thread.id}`}>
                 {post.thread.title}
-              </Link></Table.Cell>
+                </Link>
+                : "No thread"
+              }
+              </Table.Cell>
               <Table.Cell>{moment(new Date(Number(post.createdAt))).format("YYYY-MM-DD HH:mm")}</Table.Cell>
             </Table.Row>
             )
