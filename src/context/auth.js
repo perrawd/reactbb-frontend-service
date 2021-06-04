@@ -1,9 +1,21 @@
 /* eslint-disable no-empty-function */
+
+/**
+ * Auth context component.
+ * Code has been used from the following project.
+ * https://github.com/hidjou/classsed-graphql-mern-apollo/blob/master/client/src/context/auth.js
+ *
+ * @author Ahmed Hadjou
+ * @version 1.0.0
+ */
 import jwtDecode from 'jwt-decode'
 import React, { useReducer, createContext } from 'react'
 
 const initialState = { user: null }
 
+/**
+ * Verify and decode JWT token and set user state.
+ */
 if (localStorage.getItem('jwtToken')) {
   const token = jwtDecode(localStorage.getItem('jwtToken'))
 
@@ -14,6 +26,9 @@ if (localStorage.getItem('jwtToken')) {
   }
 }
 
+/**
+ * Create context.
+ */
 const AuthContext = createContext({
   user: null,
   // eslint-disable-next-line no-unused-vars
@@ -21,6 +36,9 @@ const AuthContext = createContext({
   logout: () => {}
 })
 
+/**
+ * Reducer function.
+ */
 const authReducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
@@ -38,6 +56,9 @@ const authReducer = (state, action) => {
   }
 }
 
+/**
+ * Provider function.
+ */
 const AuthProvider = props => {
   const [state, dispatch] = useReducer(authReducer, initialState)
 
