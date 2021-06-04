@@ -7,6 +7,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Table, Image } from 'semantic-ui-react'
+import moment from 'moment'
 
 export const SubCategory = props => {
   return (
@@ -25,10 +26,11 @@ export const SubCategory = props => {
       </Table.Cell>
       <Table.Cell width={5}>{
           props.data.latest
-          ? <div><Link to={`http://localhost:3000/thread?sid=${props.data.latest.id}`}>
+          ? <div><Link to={`/thread?sid=${props.data.latest.id}`}>
               {props.data.latest.title}
             </Link>
-            <p>Posted on {props.data.latest.createdAt}<br/>by {props.data.latest.author}</p>
+            <p>Posted on {moment(new Date(Number(props.data.latest.createdAt))).format("YYYY-MM-DD HH:mm")}
+            <br/>by {props.data.latest.author}</p>
             </div>
           : "No threads available"
         }

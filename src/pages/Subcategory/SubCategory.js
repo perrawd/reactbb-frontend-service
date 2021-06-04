@@ -84,7 +84,7 @@ const Subcategory = props => {
           </Button>
         </Link>
       }
-      <Table>
+      <Table color="purple">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell width={8}>
