@@ -1,3 +1,9 @@
+/**
+ * Threads component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useContext, useState } from 'react'
 import { gql, useQuery, useMutation } from '@apollo/client'
 
@@ -11,6 +17,9 @@ import ReplyThread from '../ReplyThread/ReplyThread'
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 import { useHistory } from 'react-router'
 
+/**
+ * GraphqQL queries.
+ */
 const GET_POST_QUERY = gql`
   query Thread($id: ID!) {
     getThreadByID(id: $id) {
@@ -63,6 +72,9 @@ const Thread = props => {
   const queryParams = props.location.search
   const shortid = new URLSearchParams(queryParams).get('sid')
 
+  /**
+   * GraphqQL mutation functions.
+   */
   const [deletePost] = useMutation(DELETE_THREAD, {
     onCompleted () {
       setOpen(false)
@@ -90,6 +102,9 @@ const Thread = props => {
 
   const { posts } = data.getThreadByID
 
+  /**
+   * Form functions.
+   */
   const deleteSubmit = event => {
     event.preventDefault()
     deletePost({

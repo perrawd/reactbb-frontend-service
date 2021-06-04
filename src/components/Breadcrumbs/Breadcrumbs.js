@@ -1,3 +1,9 @@
+/**
+ * Breadcrumbs component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Breadcrumb } from 'semantic-ui-react'

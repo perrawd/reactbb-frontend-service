@@ -1,3 +1,9 @@
+/**
+ * Category component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import { Table } from 'semantic-ui-react'
 

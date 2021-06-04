@@ -1,48 +1,57 @@
+/**
+ * AddThread component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form, TextArea } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 
+/**
+ * GraphqQL mutation queries.
+ */
+const ADD_POST = gql`
+ mutation addPost(
+   $body: String!
+   $author: String!
+ ) {
+   addPost(
+       body: $body
+       author: $author
+   ) {
+     id
+   }
+}
+`
+
+const ADD_THREAD = gql`
+  mutation addThread(
+    $title: String!
+    $subtitle: String!
+    $subcategory: String!
+    $posts: String!
+  ) {
+    addThread(
+      title: $title
+      subtitle: $subtitle
+      subcategory: $subcategory
+      posts: $posts
+    ) {
+      id
+      title
+      posts {
+        title
+      }
+    }
+  }
+`
+
 const AddThread = props => {
   const history = useHistory()
 
   const [errors, setErrors] = useState({})
-
-  const ADD_POST = gql`
-    mutation addPost(
-      $body: String!
-      $author: String!
-    ) {
-      addPost(
-          body: $body
-          author: $author
-      ) {
-        id
-      }
-    }
-    `
-
-  const ADD_THREAD = gql`
-    mutation addThread(
-      $title: String!
-      $subtitle: String!
-      $subcategory: String!
-      $posts: String!
-    ) {
-      addThread(
-        title: $title
-        subtitle: $subtitle
-        subcategory: $subcategory
-        posts: $posts
-      ) {
-        id
-        title
-        posts {
-          title
-        }
-      }
-    }
-  `
 
   const [threadValues, setThreadValues] = useState({
     title: '',
@@ -56,6 +65,9 @@ const AddThread = props => {
     author: 'testingfromfrontend'
   })
 
+  /**
+   * GraphqQL mutation functions.
+   */
   const [addThread] = useMutation(ADD_THREAD, {
     refetchQueries: [
       { query: props.location.state.query,
@@ -83,6 +95,9 @@ const AddThread = props => {
     }
   })
 
+  /**
+   * Form functions.
+   */
   const onThreadChange = event => {
     setThreadValues({
       ...threadValues,

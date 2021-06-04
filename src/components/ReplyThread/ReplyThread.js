@@ -1,7 +1,16 @@
+/**
+ * ReplyThread component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form, TextArea } from 'semantic-ui-react'
 
+/**
+ * GraphqQL mutation queries.
+ */
 const ADD_POST = gql`
   mutation addPost($body: String!, $thread: String!, $replyto: ID) {
     addPost(body: $body, thread: $thread, replyto: $replyto) {
@@ -19,6 +28,9 @@ const ReplyThread = props => {
     replyto: props.post ? props.post.id : null
   })
 
+  /**
+   * GraphqQL mutation functions.
+   */
   const [addPost, { loading }] = useMutation(ADD_POST, {
     refetchQueries: [
       {
@@ -32,6 +44,9 @@ const ReplyThread = props => {
     }
   })
 
+  /**
+   * Form functions.
+   */
   const onChange = event => {
     setValues({
       ...values,

@@ -1,3 +1,9 @@
+/**
+ * ThreadPost component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useContext, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Card, Image, Button, Message, Icon } from 'semantic-ui-react'

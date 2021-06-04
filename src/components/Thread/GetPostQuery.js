@@ -1,3 +1,9 @@
+/**
+ * GET_POST_QUERY component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import { gql } from '@apollo/client'
 
 const GET_POST_QUERY = gql`

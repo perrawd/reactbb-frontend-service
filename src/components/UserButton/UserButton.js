@@ -1,3 +1,9 @@
+/**
+ * UserButton component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Popup, Menu, Image } from 'semantic-ui-react'

@@ -1,9 +1,17 @@
+/**
+ * NavBar component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useContext, useState } from 'react'
 import { Menu, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+
 import { AuthContext } from '../../context/auth'
-import UserButton from '../UserButton/UserButton'
 import { MessageContext } from '../../context/flashmessage'
+
+import UserButton from '../UserButton/UserButton'
 
 const NavBar = () => {
   const { user } = useContext(AuthContext)

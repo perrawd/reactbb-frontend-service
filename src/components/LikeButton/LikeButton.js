@@ -1,8 +1,29 @@
 /* eslint-disable no-nested-ternary */
+
+/**
+ * LikeButton component.
+ * Code has been used from the following project.
+ * https://github.com/hidjou/classsed-graphql-mern-apollo/blob/master/client/src/components/LikeButton.js
+ *
+ * @author Ahmed Hadjou
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import { gql, useMutation } from '@apollo/client'
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { Button, Icon, Label } from 'semantic-ui-react'
+
+/**
+ * GraphqQL queries.
+ */
+const LIKE_POST_MUTATION = gql`
+mutation addLikes($id: ID!) {
+  addLikes(id: $id) {
+    success
+  }
+}
+`
 
 const LikeButton = props => {
   const history = useHistory()
@@ -11,14 +32,9 @@ const LikeButton = props => {
 
   const [currentLikes, setCurrentLikes] = useState(props.post.likes.length)
 
-  const LIKE_POST_MUTATION = gql`
-    mutation addLikes($id: ID!) {
-      addLikes(id: $id) {
-        success
-      }
-    }
-  `
-
+/**
+ * Check if authorized user has already liked the post.
+ */
   useEffect(
     () => {
       if (
@@ -31,6 +47,9 @@ const LikeButton = props => {
     [props.user, props.post.likes]
   )
 
+/**
+ * GraphqQL addLikes mutation.
+ */
   const [addLikes] = useMutation(LIKE_POST_MUTATION, {
     variables: { id: props.post.id },
     refetchQueries: [

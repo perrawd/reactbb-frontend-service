@@ -1,3 +1,9 @@
+/**
+ * ThreadList component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import { gql, useQuery } from '@apollo/client'
 import { List } from 'semantic-ui-react'

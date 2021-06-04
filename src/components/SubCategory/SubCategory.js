@@ -1,10 +1,14 @@
+/**
+ * SubCategory component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Table, Image } from 'semantic-ui-react'
 
 export const SubCategory = props => {
-  // eslint-disable-next-line no-console
-  console.log(props)
   return (
     <Table.Row key={props.data.id}>
       <Table.Cell width={1} textAlign="center">

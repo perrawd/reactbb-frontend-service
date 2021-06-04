@@ -1,8 +1,20 @@
+/**
+ * Register component.
+ * Parts of this component has been inspired from the following project.
+ * https://github.com/hidjou/classsed-graphql-mern-apollo/blob/master/client/src/pages/Register.js
+ *
+ * @author Per Rawdin
+ * @author Ahmed Hadjou
+ * @version 1.0.0
+ */
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form } from 'semantic-ui-react'
 
+/**
+ * GraphqQL mutation queries.
+ */
 const REGISTER_USER = gql`
   mutation register(
     $username: String!
@@ -35,13 +47,9 @@ const Register = () => {
     confirmPassword: ''
   })
 
-  const onChange = event => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    })
-  }
-
+  /**
+   * GraphqQL mutation functions.
+   */
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update () {
       history.push('/')
@@ -50,6 +58,16 @@ const Register = () => {
       setErrors(err.graphQLErrors[0].extensions.exception.validationMessages)
     }
   })
+
+  /**
+   * Form functions.
+   */
+  const onChange = event => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value
+    })
+  }
 
   const onSubmit = event => {
     event.preventDefault()

@@ -1,10 +1,23 @@
+/**
+ * Login component.
+ * Parts of this component has been inspired from the following project.
+ * https://github.com/hidjou/classsed-graphql-mern-apollo/blob/master/client/src/pages/Login.js
+ *
+ * @author Per Rawdin
+ * @author Ahmed Hadjou
+ * @version 1.0.0
+ */
 import React, { useState, useContext } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { useHistory } from 'react-router'
 import { Button, Form } from 'semantic-ui-react'
+
 import { AuthContext } from '../../context/auth'
 import { MessageContext } from '../../context/flashmessage'
 
+/**
+ * GraphqQL mutation queries.
+ */
 const LOGIN_USER = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password) {
@@ -30,13 +43,9 @@ const Login = () => {
     password: ''
   })
 
-  const onChange = event => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    })
-  }
-
+  /**
+   * GraphqQL mutation functions.
+   */
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update (proxy, { data: { login: userData } }) {
       context.login(userData)
@@ -52,6 +61,16 @@ const Login = () => {
       setErrors(err.graphQLErrors[0].extensions.exception.message)
     }
   })
+
+  /**
+   * Form functions.
+   */
+  const onChange = event => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value
+    })
+  }
 
   const onSubmit = event => {
     event.preventDefault()

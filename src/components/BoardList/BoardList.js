@@ -1,8 +1,18 @@
+/**
+ * BoardList component.
+ * Displays a list of categories and it's subcategories.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import { gql, useQuery } from '@apollo/client'
 
 import Category from '../Category/Category.js'
 
+/**
+ * GraphqQL queries.
+ */
 const GET_CATEGORIES_QUERY = gql`
   query {
     getCategories {
