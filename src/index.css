@@ -7,8 +7,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
 footer {
-  height: 50px;
+  height: 100px;
+
 }
 
 code {
@@ -20,8 +25,3 @@ code {
   width: 400px;
   margin: auto;
 }
-
-.container {
-  margin-bottom: 100px;
-}
-

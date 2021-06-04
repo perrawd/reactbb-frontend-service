@@ -11,7 +11,7 @@ import { SubCategory } from '../SubCategory/SubCategory.js'
 
 const Category = props => {
   return (
-    <Table fixed>
+    <Table color="teal" fixed>
       <Table.Body>
         <Table.Row>
           <Table.Cell width={1} textAlign="center" />

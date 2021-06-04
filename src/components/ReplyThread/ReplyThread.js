@@ -56,8 +56,6 @@ const ReplyThread = props => {
 
   const onSubmit = event => {
     event.preventDefault()
-    // eslint-disable-next-line no-console
-    console.log(values)
     addPost({ variables: values })
     setValues({
       ...values,
