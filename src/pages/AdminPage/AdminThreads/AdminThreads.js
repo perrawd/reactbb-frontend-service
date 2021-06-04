@@ -32,12 +32,7 @@ const AdminThreads = props => {
   })
 
   const deleteSubmit = (event, arg) => {
-          // eslint-disable-next-line no-console
-    console.log(event)
-              // eslint-disable-next-line no-console
-              console.log(arg)
     event.preventDefault()
-
     deletePost({
       variables: { id: arg }
     })

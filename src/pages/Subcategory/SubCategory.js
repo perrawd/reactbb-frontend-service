@@ -7,21 +7,21 @@ import moment from 'moment'
 import { AuthContext } from '../../context/auth'
 
 export const GET_THREADS_QUERY = gql`
-query SubCategory($id: ID!) {
-  getSubCategoryByID(id: $id) {
-    title
-    category {
+  query SubCategory($id: ID!) {
+    getSubCategoryByID(id: $id) {
       title
-    }
-    threads {
-      id
-      title
-      author
-      postCount
-      updatedAt
+      category {
+        title
+      }
+      threads {
+        id
+        title
+        author
+        postCount
+        updatedAt
+      }
     }
   }
-}
 `
 
 const Subcategory = props => {

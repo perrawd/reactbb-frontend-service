@@ -60,9 +60,6 @@ const Thread = props => {
 
   const history = useHistory()
 
-  // eslint-disable-next-line no-console
-  console.log(props)
-
   const queryParams = props.location.search
   const shortid = new URLSearchParams(queryParams).get('sid')
 
@@ -88,8 +85,6 @@ const Thread = props => {
     return 'Loading...'
   }
   if (error) {
-    // eslint-disable-next-line no-console
-    console.error(error)
     return `Error! ${error.message}`
   }
 
