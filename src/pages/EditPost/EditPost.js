@@ -1,3 +1,9 @@
+/**
+ * EditPost page component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useState, useContext } from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
 import { Form, TextArea, Button, Icon, Modal, Header } from 'semantic-ui-react'
@@ -6,6 +12,9 @@ import { gql, useMutation } from '@apollo/client'
 import { AuthContext } from '../../context/auth'
 import { MessageContext } from '../../context/flashmessage'
 
+/**
+ * GraphqQL mutation queries.
+ */
 const EDIT_POST = gql`
   mutation editPost($id: ID!, $body: String!, $isEdited: Boolean) {
     editPost(id: $id, body: $body, isEdited: $isEdited) {
@@ -42,6 +51,9 @@ const EditPost = props => {
     body: props.location.state.post.body
   })
 
+  /**
+   * GraphqQL mutation functions.
+   */
   const [editPost, { loading }] = useMutation(EDIT_POST, {
     refetchQueries: refetchQueryOptions,
     awaitRefetchQueries: true,
@@ -73,6 +85,9 @@ const EditPost = props => {
     }
   })
 
+  /**
+   * Form functions.
+   */
   const onPostChange = event => {
     setPostValues({
       ...postValues,

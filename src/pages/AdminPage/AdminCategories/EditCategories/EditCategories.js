@@ -1,3 +1,10 @@
+/**
+ * EditCategories component.
+ * Main page for EditCategories.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useState } from 'react'
 import { Card, Button } from 'semantic-ui-react'
 import EditCategory from './EditCategory/EditCategory'
@@ -6,8 +13,8 @@ const EditCategories = props => {
   const [activeCategory, setActiveCategory] = useState({})
   const [editCategory, setEditCategory] = useState(false)
 
-  const handleOnClick = cat => {
-    setActiveCategory(cat)
+  const handleOnClick = category => {
+    setActiveCategory(category)
     setEditCategory(true)
   }
 

@@ -1,9 +1,18 @@
+/**
+ * AdminUsers component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useState, useContext } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Table, Button, Label, Modal, Header, Icon } from 'semantic-ui-react'
 import moment from 'moment'
 import { MessageContext } from '../../../context/flashmessage'
 
+/**
+ * GraphqQL mutation queries.
+ */
 const DELETE_USER = gql`
   mutation deleteUser($id: ID!) {
   deleteUser(id: $id) {
@@ -23,6 +32,9 @@ const AdminUsers = props => {
     id: ''
   })
 
+  /**
+   * GraphqQL mutation functions.
+   */
   const [deleteUser] = useMutation(DELETE_USER, {
     onCompleted () {
       setOpen(false)

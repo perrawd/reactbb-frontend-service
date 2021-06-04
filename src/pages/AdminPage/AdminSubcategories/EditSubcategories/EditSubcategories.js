@@ -1,8 +1,14 @@
+/**
+ * EditSubcategories component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useState } from 'react'
 import { Button, Table } from 'semantic-ui-react'
 import EditSubcategory from './EditSubcategory/EditSubcategory'
 
-const AddSubcategory = props => {
+const EditSubcategories = props => {
   const [activeSubcategory, setActiveSubcategory] = useState({})
   const [editSubcategory, setEditSubcategory] = useState(false)
 
@@ -44,4 +50,4 @@ const AddSubcategory = props => {
   )
 }
 
-export default AddSubcategory
+export default EditSubcategories

@@ -1,5 +1,13 @@
+/**
+ * AdminPage component.
+ * Admin Center main page.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
+
 import Statistics from './Statistics/Statistics'
 import AdminUsers from './AdminUsers/AdminUsers'
 import AdminPosts from './AdminPosts/AdminPosts'
@@ -10,17 +18,17 @@ import useMultipleQueries from './useMultipleQueries'
 const AdminPage = () => {
 
   const [
-      { loading: loading1, data: gCategories },
-      { loading: loading2, data: gPosts },
-      { loading: loading3, data: gUsers }
+      { loading: loading1, data: getCategories },
+      { loading: loading2, data: getPosts },
+      { loading: loading3, data: getUsers }
     ] = useMultipleQueries()
       if (loading1 || loading2 || loading3) {
         return 'Loading...'
   }
 
-  const categories = gCategories.getCategories
-  const posts = gPosts.getPosts
-  const users = gUsers.getUsers
+  const categories = getCategories.getCategories
+  const posts = getPosts.getPosts
+  const users = getUsers.getUsers
 
   const panes = [
     { menuItem: 'Statistics',

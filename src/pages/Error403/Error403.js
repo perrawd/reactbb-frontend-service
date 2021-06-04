@@ -1,3 +1,9 @@
+/**
+ * Error 403 page component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
 

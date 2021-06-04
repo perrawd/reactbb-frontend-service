@@ -1,3 +1,10 @@
+/**
+ * AdminCategories component.
+ * Main page for AdminCategories.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import EditCategories from './EditCategories/EditCategories'

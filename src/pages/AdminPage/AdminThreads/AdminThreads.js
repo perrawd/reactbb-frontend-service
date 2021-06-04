@@ -1,3 +1,9 @@
+/**
+ * AdminThreads component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useState, useContext } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Table, Header, Icon, Modal, Button } from 'semantic-ui-react'

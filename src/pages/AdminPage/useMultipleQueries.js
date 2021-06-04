@@ -1,3 +1,10 @@
+/**
+ * UseMultipleQueries page component.
+ * Export queries used for AdminPage component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import { gql, useQuery } from '@apollo/client'
 
 export const GET_CATEGORIES_QUERY = gql`

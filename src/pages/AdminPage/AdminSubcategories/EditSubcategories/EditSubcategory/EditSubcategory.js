@@ -1,9 +1,19 @@
+/**
+ * EditSubcategory component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useState, useContext } from 'react'
 import { Form, TextArea, Button, Icon, Modal, Header } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
+
 import { MessageContext } from '../../../../../context/flashmessage'
 import { GET_CATEGORIES_QUERY } from '../../../useMultipleQueries.js'
 
+/**
+ * GraphqQL mutation queries.
+ */
 const EDIT_SUBCATEGORY = gql`
   mutation editSubcategory($id: ID!, $title: String, $subtitle: String) {
     editSubcategory(id: $id, title: $title, subtitle: $subtitle) {
@@ -34,6 +44,9 @@ const EditSubcategory = props => {
 
   const queryOptions = [{ query: GET_CATEGORIES_QUERY }]
 
+  /**
+   * GraphqQL mutation functions.
+   */
   const [editCategory, { loading }] = useMutation(EDIT_SUBCATEGORY, {
     refetchQueries: queryOptions,
     onCompleted () {
@@ -66,6 +79,9 @@ const EditSubcategory = props => {
     }
   })
 
+  /**
+   * Form functions.
+   */
   const onPostChange = event => {
     setPostValues({
       ...postValues,

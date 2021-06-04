@@ -1,9 +1,18 @@
+/**
+ * AddSubcategory component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useState, useContext } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form } from 'semantic-ui-react'
 import { MessageContext } from '../../../../context/flashmessage'
 import { GET_CATEGORIES_QUERY } from '../../useMultipleQueries.js'
 
+/**
+ * GraphqQL mutation queries.
+ */
 const ADD_SUBCATEGORY = gql`
   mutation addSubCategory($title: String!, $subtitle: String, $category: ID) {
     addSubCategory(title: $title, subtitle: $subtitle, category: $category) {
@@ -30,6 +39,9 @@ const AddSubcategory = props => {
     category: ''
   })
 
+  /**
+   * GraphqQL mutation functions.
+   */
   const [addSubcategory] = useMutation(ADD_SUBCATEGORY, {
     refetchQueries: [{ query: GET_CATEGORIES_QUERY }],
     onCompleted () {
@@ -49,6 +61,9 @@ const AddSubcategory = props => {
     }
   })
 
+  /**
+   * Form functions.
+   */
   const onPostChange = event => {
     setPostValues({
       ...postValues,

@@ -1,9 +1,16 @@
+/**
+ * AdminSubcategories component.
+ * Main page for AdminSubcategories.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import EditSubcategories from './EditSubcategories/EditSubcategories'
 import AddSubcategory from './AddSubcategory/AddSubcategory'
 
-const TabExampleVerticalTabular = props => {
+const AdminSubcategories = props => {
   const { categories } = props
   const panes = [
     { menuItem: 'Edit subcategories',
@@ -20,4 +27,4 @@ return <Tab menu={{ fluid: true,
        panes={panes} />
 }
 
-export default TabExampleVerticalTabular
+export default AdminSubcategories

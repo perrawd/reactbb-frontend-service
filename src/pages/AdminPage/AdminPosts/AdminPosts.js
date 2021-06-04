@@ -1,9 +1,16 @@
+/**
+ * AdminPosts component.
+ * Main page for AdminPosts.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Table } from 'semantic-ui-react'
 import moment from 'moment'
 
-const GetUsers = props => {
+const AdminPosts = props => {
   const {posts} = props
 
   return (
@@ -41,4 +48,4 @@ const GetUsers = props => {
   )
 }
 
-export default GetUsers
+export default AdminPosts

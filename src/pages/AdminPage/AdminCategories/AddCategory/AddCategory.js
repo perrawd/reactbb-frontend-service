@@ -1,9 +1,18 @@
+/**
+ * AddCategory component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useState, useContext } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form } from 'semantic-ui-react'
 import { MessageContext } from '../../../../context/flashmessage'
 import { GET_CATEGORIES_QUERY } from '../../useMultipleQueries.js'
 
+/**
+ * GraphqQL mutation queries.
+ */
 const ADD_CATEGORY = gql`
   mutation addCategory($title: String!, $subtitle: String) {
     addCategory(title: $title, subtitle: $subtitle) {
@@ -23,6 +32,9 @@ const AddCategory = () => {
     subtitle: ''
   })
 
+  /**
+   * GraphqQL mutation functions.
+   */
   const [addCategory] = useMutation(ADD_CATEGORY, {
     refetchQueries: [{ query: GET_CATEGORIES_QUERY }],
     onCompleted () {
@@ -41,6 +53,9 @@ const AddCategory = () => {
     }
   })
 
+  /**
+   * Form functions.
+   */
   const onPostChange = event => {
     setPostValues({
       ...postValues,

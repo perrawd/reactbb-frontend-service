@@ -1,3 +1,9 @@
+/**
+ * SubCategory page component.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { gql, useQuery } from '@apollo/client'
@@ -24,6 +30,10 @@ export const GET_THREADS_QUERY = gql`
   }
 `
 
+/**
+ * Display a specific Subcategory page with it's threads.
+ *
+ */
 const Subcategory = props => {
   const { user } = useContext(AuthContext)
 
