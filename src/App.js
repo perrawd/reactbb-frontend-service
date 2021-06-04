@@ -27,6 +27,7 @@ import EditPost from './pages/EditPost/EditPost'
 import Error404 from './pages/Error404/Error404'
 import Error403 from './pages/Error403/Error403'
 import TermsOfUse from './pages/TermsOfUse/TermsOfUse'
+import MyProfile from './pages/MyProfile/MyProfile'
 
 
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
               <ProtectedRoute exact path="/addthread" component={AddThread} />
               <ProtectedRoute exact path="/editpost" component={EditPost} />
               <AdminRoute exact path="/admin" component={AdminPage} />
+              <Route exact path="/profile" component={MyProfile} />
               <Route exact path="/termsofuse" component={TermsOfUse} />
               <Route exact path="/403" component={Error403} />
               <Route exact path="*" component={Error404} />

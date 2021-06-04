@@ -42,10 +42,10 @@ const UserButton = () => {
           </Menu.Item>
         }
         <Menu.Item
-          disabled
-          name="feed"
-          active={activeItem === 'feed'}
-          onClick={handleItemClick}
+          name="my page"
+          active={activeItem === 'my page'}
+          as={Link}
+          to="/profile/"
         />
         <Menu.Item
           disabled
