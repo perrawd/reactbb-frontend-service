@@ -161,6 +161,7 @@ const EditPost = props => {
             </Button>
           </Modal.Actions>
         </Modal>
+        <Button type="button" onClick={() => history.goBack()}>Cancel</Button>
       </Form>
       {Object.keys(errors).length > 0 && <div className="ui error message">
           <ul className="list">

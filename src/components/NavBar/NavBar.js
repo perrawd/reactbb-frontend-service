@@ -35,7 +35,7 @@ const NavBar = () => {
             message: '',
             type: ''
           })}
-        color={message.type}
+        color={message.type || 'blue'}
       >
         {message.message}
       </Message>

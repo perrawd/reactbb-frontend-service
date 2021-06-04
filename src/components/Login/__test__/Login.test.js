@@ -4,20 +4,25 @@ import Login from '../Login'
 import client from '../../../utils/ApolloClient.js'
 import { ApolloProvider } from "@apollo/client"
 import { render, screen, fireEvent } from '@testing-library/react'
+import MessageProvider from '../../../context/flashmessage'
 
 test('It renders login page without error', () => {
-  render(<ApolloProvider client={client}>
-      <Login></Login>
-    </ApolloProvider>)
+  render(<MessageProvider>
+      <ApolloProvider client={client}>
+        <Login></Login>
+      </ApolloProvider>
+    </MessageProvider>)
   const pageElement = screen.getAllByText(/Login/i)
   const element = pageElement[0]
   expect(element).toBeInTheDocument()
 })
 
 it('can change the value of a Input', () => {
-  const { getAllByPlaceholderText } = render(<ApolloProvider client={client}>
+  const { getAllByPlaceholderText } = render(<MessageProvider>
+    <ApolloProvider client={client}>
       <Login></Login>
-    </ApolloProvider>)
+    </ApolloProvider>
+  </MessageProvider>)
 
   const element = getAllByPlaceholderText('Username')
   const elementInput = element[0]
