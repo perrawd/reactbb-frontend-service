@@ -28,6 +28,19 @@ const NavBar = () => {
     marginBottom: 10
   }
 
+  const messageHeader = <div style={{ marginBottom: 10 }}>
+      <Message
+        onDismiss={() => setMessage({
+            active: false,
+            message: '',
+            type: ''
+          })}
+        color={message.type}
+      >
+        {message.message}
+      </Message>
+    </div>
+
   return user ? <div>
       <Menu pointing secondary style={divStyle}>
         <Menu.Item
@@ -41,21 +54,8 @@ const NavBar = () => {
           <UserButton />
         </Menu.Menu>
       </Menu>
-      {message.active && <div style={{ marginBottom: 10 }}>
-          <Message
-            onDismiss={() => setMessage({
-                active: false,
-                message: '',
-                type: ''
-              })}
-            color={message.type}
-          >
-            {message.message}
-          </Message>
-        </div>
-      }
-    </div>
-    : <div>
+      {message.active && messageHeader}
+    </div> : <div>
       <Menu pointing secondary style={divStyle}>
         <Menu.Item
           name="home"
@@ -83,6 +83,7 @@ const NavBar = () => {
           />
         </Menu.Menu>
       </Menu>
+      {message.active && messageHeader}
     </div>
 }
 

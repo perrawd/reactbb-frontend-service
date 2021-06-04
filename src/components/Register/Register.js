@@ -7,10 +7,12 @@
  * @author Ahmed Hadjou
  * @version 1.0.0
  */
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router'
 import { gql, useMutation } from '@apollo/client'
 import { Button, Form } from 'semantic-ui-react'
+
+import { MessageContext } from '../../context/flashmessage'
 
 /**
  * GraphqQL mutation queries.
@@ -40,6 +42,8 @@ const Register = () => {
 
   const [errors, setErrors] = useState({})
 
+  const [, setMessage] = useContext(MessageContext)
+
   const [values, setValues] = useState({
     username: '',
     email: '',
@@ -52,7 +56,12 @@ const Register = () => {
    */
   const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     update () {
-      history.push('/')
+      setMessage({
+        active: true,
+        message: "Your account has been registered. Please login with your credentials.",
+        type: "green"
+      })
+      history.push('/login')
     },
     onError (err) {
       setErrors(err.graphQLErrors[0].extensions.exception.validationMessages)

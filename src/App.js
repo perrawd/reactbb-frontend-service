@@ -1,3 +1,9 @@
+/**
+ * Main entry point of the application.
+ *
+ * @author Per Rawdin
+ * @version 1.0.0
+ */
 import React from 'react'
 import './App.css'
 import { Container } from 'semantic-ui-react'
@@ -11,7 +17,6 @@ import MessageProvider from './context/flashmessage'
 
 import Navbar from './components/NavBar/NavBar'
 import { BoardList } from './components/BoardList/BoardList'
-import ThreadsList from './components/ThreadList/ThreadList'
 import Register from './components/Register/Register'
 import Login from './components/Login/Login'
 import AddThread from './components/AddThread/AddThread'
@@ -32,7 +37,6 @@ const App = () => {
             <Navbar />
             <Switch>
               <Route exact path="/" component={BoardList} />
-              <Route exact path="/posts" component={ThreadsList} />
               <AuthRoute exact path="/register" component={Register} />
               <AuthRoute exact path="/login" component={Login} />
               <Route exact path="/subcategories" component={Subcategory} />
