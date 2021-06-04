@@ -84,20 +84,22 @@ const Subcategory = props => {
           </Button>
         </Link>
       }
-      <Table celled sortable>
-        <Table.Body>
+      <Table>
+        <Table.Header>
           <Table.Row>
-            <Table.Cell width={8}>
+            <Table.HeaderCell width={8}>
               <h5>Threads</h5>
-            </Table.Cell>
-            <Table.Cell width={1} textAlign="center">
+            </Table.HeaderCell>
+            <Table.HeaderCell width={1} textAlign="center">
               Posts
-            </Table.Cell>
-            <Table.Cell width={3} textAlign="center">
+            </Table.HeaderCell>
+            <Table.HeaderCell width={3} textAlign="center">
               Posted by
-            </Table.Cell>
-            <Table.Cell width={4}>Last updated</Table.Cell>
+            </Table.HeaderCell>
+            <Table.HeaderCell width={4}>Last updated</Table.HeaderCell>
           </Table.Row>
+        </Table.Header>
+          <Table.Body>
           {threads.map(thread => {
             return (
               <Table.Row key={thread.id}>

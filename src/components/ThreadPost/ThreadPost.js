@@ -30,7 +30,7 @@ const ThreadPost = props => {
         <Image
           floated="left"
           size="mini"
-          src={`https://semantic-ui.com/images/avatar2/large/mark.png`}
+          src={`profile.png`}
         />
         <Card.Header />
         <Card.Meta>Posted by {props.data.author}</Card.Meta>

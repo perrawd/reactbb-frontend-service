@@ -14,19 +14,16 @@ export const SubCategory = props => {
       <Table.Cell width={1} textAlign="center">
         <Image src="./logo192.png" size="mini" />
       </Table.Cell>
-      <Table.Cell width={7}>
+      <Table.Cell width={8}>
         <Link to={`/subcategories?sid=${props.data.id}`}>
           <h5>{props.data.title}</h5>
         </Link>
         {props.data.subtitle}
       </Table.Cell>
-      <Table.Cell width={1} textAlign="center">
+      <Table.Cell width={2} textAlign="center">
         {props.data.threadCount}
       </Table.Cell>
-      <Table.Cell width={1} textAlign="center">
-        10
-      </Table.Cell>
-      <Table.Cell width={6}>{
+      <Table.Cell width={5}>{
           props.data.latest
           ? <div><Link to={`http://localhost:3000/thread?sid=${props.data.latest.id}`}>
               {props.data.latest.title}

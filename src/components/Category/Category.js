@@ -15,16 +15,13 @@ const Category = props => {
       <Table.Body>
         <Table.Row>
           <Table.Cell width={1} textAlign="center" />
-          <Table.Cell width={7}>
+          <Table.Cell width={8}>
             <h3>{props.data.title}</h3>
           </Table.Cell>
-          <Table.Cell width={1} textAlign="center">
-            Trådar
+          <Table.Cell width={2} textAlign="center">
+            Threads
           </Table.Cell>
-          <Table.Cell width={1} textAlign="center">
-            Inlägg
-          </Table.Cell>
-          <Table.Cell width={6}>Senaste inlägg</Table.Cell>
+          <Table.Cell width={5}>Latest thread</Table.Cell>
         </Table.Row>
         {props.data.subcategories.map(subcategory => {
           return <SubCategory data={subcategory} key={subcategory.id} />

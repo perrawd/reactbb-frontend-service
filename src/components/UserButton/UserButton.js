@@ -24,7 +24,7 @@ const UserButton = () => {
           <Image
             size="mini"
             alt="avatar"
-            src="https://semantic-ui.com/images/avatar2/small/mark.png"
+            src="./profile.png"
             circular
           />
         </Menu.Item>
