@@ -46,7 +46,7 @@ const App = () => {
               <ProtectedRoute exact path="/addthread" component={AddThread} />
               <ProtectedRoute exact path="/editpost" component={EditPost} />
               <AdminRoute exact path="/admin" component={AdminPage} />
-              <Route exact path="/profile" component={MyProfile} />
+              <ProtectedRoute exact path="/profile" component={MyProfile} />
               <Route exact path="/termsofuse" component={TermsOfUse} />
               <Route exact path="/403" component={Error403} />
               <Route exact path="*" component={Error404} />
