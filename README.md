@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# reactBB
+A modern web forum platform built with React, GraphQL and Semantic UI. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ⭐ Features
+- List topic categories and sub-categories
+- List threads belonging to a sub-category
+- List posts belonging to a thread
+- Register for an user account
+- Registered users can login receiving a JWT for authentification
+- Registered users can post, edit and delete threads/posts
+- Registered users can reply to other users threads and posts
+- Registered users can like other users posts
+- Moderators can access an admin dashboard
+- Moderators can add, edit and delete categories
+- Moderators can add, edit and delete subcategories
+- Moderators can add, edit and delete all threads
+- Moderators can add, edit and delete all posts
 
-## Available Scripts
+## ⛩️ Dependencies
+- This is a front-end application depending on data from resource and authentification API services accessible from a single gateway end-point.
+- GraphQL Apollo Federation service
+- Resource service
+- Authentification service
 
-In the project directory, you can run:
+## 🚀 Technologies
+- React
+- GraphQL Apollo client
+- Semantic UI
 
-### `npm start`
+## 🛣️ Roadmap
+- Social feed
+- Friends list / Followers
+- User profile
+- User avatar upload
+- Edit user profile
+- Request and delete user data
+- Upload pictures in posts
+- Proper text formatting in posts
+- SuperUser access
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Parts of this application is inspired by the following projects/tutorials:
+- GraphQL official documentation
+- https://github.com/hidjou/classsed-graphql-mern-apollo/tree/master/client/src
+- https://github.com/henrispkl/MernBB
