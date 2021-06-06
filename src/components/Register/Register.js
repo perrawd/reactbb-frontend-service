@@ -119,7 +119,7 @@ const Register = () => {
           value={values.confirmPassword}
           onChange={onChange}
         />
-        <p>By creating an account, you are agreeing to the <a href="/termsofuse">Terms of Use</a>.</p>
+        <p>By creating an account, you are agreeing to the <a href="./termsofuse">Terms of Use</a>.</p>
         <Button type="submit">Submit</Button>
       </Form>
       {Object.keys(errors).length > 0 && <div className="ui error message">

@@ -35,7 +35,7 @@ const App = () => {
     <AuthProvider>
       <MessageProvider>
         <Container>
-          <Router>
+          <Router basename={process.env.REACT_APP_BASE}>
             <Navbar />
             <Switch>
               <Route exact path="/" component={BoardList} />

@@ -47,7 +47,7 @@ const EditSubcategory = props => {
   /**
    * GraphqQL mutation functions.
    */
-  const [editCategory, { loading }] = useMutation(EDIT_SUBCATEGORY, {
+  const [editSubcategory, { loading }] = useMutation(EDIT_SUBCATEGORY, {
     refetchQueries: queryOptions,
     onCompleted () {
       setOpen(false)
@@ -92,7 +92,7 @@ const EditSubcategory = props => {
 
   const onSubmit = event => {
     event.preventDefault()
-    editCategory({ variables: postValues })
+    editSubcategory({ variables: postValues })
   }
 
   const deleteSubmit = event => {
@@ -132,21 +132,21 @@ const EditSubcategory = props => {
           size="small"
           trigger={
             <Button type="button" basic color="red">
-              Delete category
+              Delete subcategory
             </Button>
           }
         >
           <Header icon>
             <Icon name="trash alternate" />
-            Delete category
+            Delete subcategory
           </Header>
           <Modal.Content>
             <p style={{ textAlign: 'center' }}>
-              Are you sure that you want to delete this category? (This action
+              Are you sure that you want to delete this subcategory? (This action
               is irreversible)
             </p>
             <p style={{ textAlign: 'center' }}>
-              ALL SUBCATEGORIES AND POSTS WILL BE REMOVED AS WELL, ARE YOU SURE?
+              ALL THREADS AND POSTS WILL BE REMOVED AS WELL, ARE YOU SURE?
             </p>
           </Modal.Content>
           <Modal.Actions>

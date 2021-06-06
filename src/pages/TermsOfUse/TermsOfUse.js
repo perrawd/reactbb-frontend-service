@@ -11,6 +11,7 @@ const TermsOfUse = () => {
 
       <h3>Account</h3>
       <p>
+        Cookies with account details are stored in your computer when logged in.
         If you are using our service for prohibited uses (see below), we are
         allowed to delete your account and/or data.
       </p>
